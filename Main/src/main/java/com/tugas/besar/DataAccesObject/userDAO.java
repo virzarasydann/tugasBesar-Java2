@@ -15,6 +15,7 @@ import java.sql.SQLException;
  * @author VirzaAbsyar
  */
 public class userDAO {
+    public String testing;
     public User checkUsername(String username) {
         User user = null;
         Connection connectDatabase = DatabaseConnection.getConnection();
