@@ -4,8 +4,10 @@
  */
 package com.tugas.besar.View;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import javax.swing.JFrame;
 import  com.tugas.besar.Controller.AuthController;
+import com.tugas.besar.Model.User;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -145,12 +147,20 @@ public class LoginView extends javax.swing.JFrame {
         String username = tfusername.getText().trim();
         String password = new String(tfpassword.getPassword());
         
+        String bcryptHashString = BCrypt.withDefaults().hashToString(12, password.toCharArray());
+        
         if (username.isEmpty() || password.isEmpty()){
         JOptionPane.showMessageDialog(this, "username dan password harus diisi!", "Error", JOptionPane.ERROR_MESSAGE );
         return;
         }
-AuthController auth = new AuthController();
-auth.login(username, password);
+        AuthController auth = new AuthController();
+        User loggedInUser = auth.login(username, password);
+
+        if (loggedInUser != null) {
+            JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + loggedInUser.getRole());
+        } else {
+            JOptionPane.showMessageDialog(this, "Login gagal. Username atau password salah.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_btnloginActionPerformed
 
