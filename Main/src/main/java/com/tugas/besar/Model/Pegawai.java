@@ -9,8 +9,8 @@ package com.tugas.besar.Model;
  * @author VirzaAbsyar
  */
 public class Pegawai extends User{
-    public Pegawai(String username, String password) {
-        super(username, password);
+    public Pegawai(int id, String username, String password) {
+        super(id, username, password);
     }
 
     @Override

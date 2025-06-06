@@ -30,13 +30,14 @@ public class userDAO {
             execute.setString(1, username);
             ResultSet result = execute.executeQuery();
             if (result.next()) {
+                int id = result.getInt("id");
                 String password = result.getString("password");
                 String role = result.getString("role");
 
                 if ("PEMILIK".equalsIgnoreCase(role)) {
-                    user = new Pemilik(username, password);
+                    user = new Pemilik(id,username, password);
                 } else if ("PEGAWAI".equalsIgnoreCase(role)) {
-                    user = new Pegawai(username, password);
+                    user = new Pegawai(id,username, password);
                 } else {
                     System.err.println("Peran tidak dikenali: " + role);
                 }
