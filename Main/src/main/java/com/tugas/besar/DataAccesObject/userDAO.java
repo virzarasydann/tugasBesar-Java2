@@ -25,7 +25,7 @@ public class userDAO {
         User user = null;
         Connection connectDatabase = DatabaseConnection.getConnection();
 
-        String query = "SELECT * FROM users WHERE username = ?";
+        String query = "SELECT * FROM users WHERE name = ?";
         try (PreparedStatement execute = connectDatabase.prepareStatement(query)) {
             execute.setString(1, username);
             ResultSet result = execute.executeQuery();
@@ -33,9 +33,11 @@ public class userDAO {
                 int id = result.getInt("id");
                 String password = result.getString("password");
                 String role = result.getString("role");
+                  
 
                 if ("PEMILIK".equalsIgnoreCase(role)) {
                     user = new Pemilik(id,username, password);
+                    
                 } else if ("PEGAWAI".equalsIgnoreCase(role)) {
                     user = new Pegawai(id,username, password);
                 } else {

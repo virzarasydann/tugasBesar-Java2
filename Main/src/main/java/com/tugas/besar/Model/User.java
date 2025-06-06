@@ -4,6 +4,8 @@
  */
 package com.tugas.besar.Model;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 /**
  *
  * @author VirzaAbsyar
@@ -22,7 +24,8 @@ public abstract class User {
 
     
     public boolean login(String inputPass) {
-        return this.password.equals(inputPass);
+        BCrypt.Result result = BCrypt.verifyer().verify(inputPass.toCharArray(), this.password);
+        return result.verified;
     }
 
    
