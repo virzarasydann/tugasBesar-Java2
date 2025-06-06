@@ -5,8 +5,8 @@
 package com.tugas.besar.DataAccesObject;
 
 import com.tugas.besar.Model.User;
-import com.tugas.besar.Model.Pemilik;
-import com.tugas.besar.Model.Pegawai;
+import com.tugas.besar.Model.Pemilik.Pemilik;
+import com.tugas.besar.Model.Pegawai.Pegawai;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

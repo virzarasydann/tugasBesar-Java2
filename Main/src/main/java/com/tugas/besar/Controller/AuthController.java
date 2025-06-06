@@ -5,8 +5,8 @@
 package com.tugas.besar.Controller;
 import com.tugas.besar.DataAccesObject.userDAO;
 import com.tugas.besar.Model.User;
-import com.tugas.besar.Model.Pemilik;
-import com.tugas.besar.Model.Pegawai;
+import com.tugas.besar.Model.Pemilik.Pemilik;
+import com.tugas.besar.Model.Pegawai.Pegawai;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
