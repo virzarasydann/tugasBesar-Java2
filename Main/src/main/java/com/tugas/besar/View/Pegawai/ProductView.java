@@ -5,10 +5,13 @@
 package com.tugas.besar.View.Pegawai;
 
 import com.tugas.besar.Controller.Pegawai.KategoriController;
+
 import com.tugas.besar.Controller.Pegawai.ProductController;
 import com.tugas.besar.Model.Pegawai.Kategori;
 import java.util.List;
 import javax.swing.JOptionPane;
+import com.tugas.besar.Model.Pegawai.Kategori;
+import java.util.List;
 
 /**
  *
@@ -249,7 +252,6 @@ public class ProductView extends javax.swing.JFrame {
     private void btntambahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntambahprodukActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btntambahprodukActionPerformed
-
 
     private void tfeditprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfeditprodukActionPerformed
         // TODO add your handling code here:
