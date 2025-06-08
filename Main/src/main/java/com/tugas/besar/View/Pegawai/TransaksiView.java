@@ -86,6 +86,12 @@ public class TransaksiView extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         btnprosespembayaran = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menutransaksi = new javax.swing.JMenu();
+        menuproduk = new javax.swing.JMenu();
+        menukategori = new javax.swing.JMenu();
+        menuriwayat = new javax.swing.JMenu();
+        menuoperasional = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,7 +156,7 @@ public class TransaksiView extends javax.swing.JFrame {
                             .addGap(0, 0, Short.MAX_VALUE)))
                     .addComponent(spinqty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfpesan))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(72, Short.MAX_VALUE)
@@ -196,11 +202,16 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jLabel12.setText("Qty");
 
+        tfnamamakanan2.setEditable(false);
         tfnamamakanan2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfnamamakanan2ActionPerformed(evt);
             }
         });
+
+        tfkategori2.setEditable(false);
+
+        tfharga2.setEditable(false);
 
         btnpesan2.setText("Pesan");
 
@@ -281,11 +292,16 @@ public class TransaksiView extends javax.swing.JFrame {
 
         jLabel17.setText("Qty");
 
+        tfnama3.setEditable(false);
+
+        tfkategaori3.setEditable(false);
         tfkategaori3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfkategaori3ActionPerformed(evt);
             }
         });
+
+        tfharga3.setEditable(false);
 
         btnpesan3.setText("Pesan");
 
@@ -359,6 +375,12 @@ public class TransaksiView extends javax.swing.JFrame {
         jLabel21.setText("Harga");
 
         jLabel22.setText("Qty");
+
+        tfnama44.setEditable(false);
+
+        tfkategori4.setEditable(false);
+
+        tfharga4.setEditable(false);
 
         btnpesan4.setText("Pesan");
 
@@ -457,34 +479,34 @@ public class TransaksiView extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel26)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tftotalharga, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tftotalharga, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addGap(73, 73, 73)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addGap(72, 72, 72)
-                            .addComponent(btnqris)
-                            .addGap(32, 32, 32)
-                            .addComponent(jButton1))))
+                            .addComponent(jLabel25)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(btnqris)
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(312, 312, 312)
-                .addComponent(btnprosespembayaran)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(312, 312, 312)
+                        .addComponent(btnprosespembayaran))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 356, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
@@ -557,6 +579,23 @@ public class TransaksiView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        menutransaksi.setText("Transaksi");
+        jMenuBar1.add(menutransaksi);
+
+        menuproduk.setText("Produk");
+        jMenuBar1.add(menuproduk);
+
+        menukategori.setText("Kategori");
+        jMenuBar1.add(menukategori);
+
+        menuriwayat.setText("Riwayat");
+        jMenuBar1.add(menuriwayat);
+
+        menuoperasional.setText("Operasional");
+        jMenuBar1.add(menuoperasional);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -658,6 +697,7 @@ public class TransaksiView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -666,6 +706,11 @@ public class TransaksiView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JMenu menukategori;
+    private javax.swing.JMenu menuoperasional;
+    private javax.swing.JMenu menuproduk;
+    private javax.swing.JMenu menuriwayat;
+    private javax.swing.JMenu menutransaksi;
     private javax.swing.JSpinner spinharga3;
     private javax.swing.JSpinner spinqty;
     private javax.swing.JSpinner spinqty2;
