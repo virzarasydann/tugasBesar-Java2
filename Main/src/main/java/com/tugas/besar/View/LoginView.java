@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import  com.tugas.besar.Controller.AuthController;
 import com.tugas.besar.Model.User;
 import com.tugas.besar.View.Pegawai.KategoriView;
+import com.tugas.besar.View.Pegawai.ProductView;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -164,9 +165,13 @@ public class LoginView extends javax.swing.JFrame {
 //            transaksiView.setVisible(true);
 //            transaksiView.setLocationRelativeTo(null); // Agar muncul di tengah layar
             
-            KategoriView kategoriView = new KategoriView();
-            kategoriView.setVisible(true);
-            kategoriView.setLocationRelativeTo(null); // Agar muncul di tengah layar
+//            KategoriView kategoriView = new KategoriView();
+//            kategoriView.setVisible(true);
+//            kategoriView.setLocationRelativeTo(null); // Agar muncul di tengah layar
+            
+            ProductView productView = new ProductView();
+            productView.setVisible(true);
+            productView.setLocationRelativeTo(null); // Agar muncul di tengah layar
 
             // Tutup frame login
             this.dispose();

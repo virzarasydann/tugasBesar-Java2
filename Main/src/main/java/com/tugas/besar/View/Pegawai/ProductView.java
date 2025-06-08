@@ -4,6 +4,10 @@
  */
 package com.tugas.besar.View.Pegawai;
 
+import com.tugas.besar.Controller.Pegawai.KategoriController;
+import com.tugas.besar.Model.Pegawai.Kategori;
+import java.util.List;
+
 /**
  *
  * @author silvi
@@ -17,6 +21,7 @@ public class ProductView extends javax.swing.JFrame {
      */
     public ProductView() {
         initComponents();
+        loadKategoriToComboBox();
     }
 
     /**
@@ -92,6 +97,11 @@ public class ProductView extends javax.swing.JFrame {
         jLabel4.setText("Kategori");
 
         cmbkategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Non - Kopi", "Kopi", "Makanan Berat", "Makanan Ringan", " " }));
+        cmbkategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbkategoriActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel5.setText("Harga");
@@ -209,6 +219,18 @@ public class ProductView extends javax.swing.JFrame {
     private void btntambahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntambahprodukActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btntambahprodukActionPerformed
+    private void cmbkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbkategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbkategoriActionPerformed
+    private void loadKategoriToComboBox() {
+        cmbkategori.removeAllItems(); // Hapus isi sebelumnya
+        KategoriController controller = new KategoriController();
+        List<Kategori> daftarKategori = controller.read();
+
+        for (Kategori kategori : daftarKategori) {
+            cmbkategori.addItem(kategori.getNama());
+        }
+    }
 
     /**
      * @param args the command line arguments
