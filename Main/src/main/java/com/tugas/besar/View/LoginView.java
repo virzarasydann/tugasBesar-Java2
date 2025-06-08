@@ -5,9 +5,11 @@
 package com.tugas.besar.View;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
+import com.tugas.besar.View.Pegawai.TransaksiView;
 import javax.swing.JFrame;
 import  com.tugas.besar.Controller.AuthController;
 import com.tugas.besar.Model.User;
+import com.tugas.besar.View.Pegawai.KategoriView;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -158,6 +160,18 @@ public class LoginView extends javax.swing.JFrame {
 
         if (loggedInUser != null) {
             JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + loggedInUser.getRole());
+//            TransaksiView transaksiView = new TransaksiView();
+//            transaksiView.setVisible(true);
+//            transaksiView.setLocationRelativeTo(null); // Agar muncul di tengah layar
+            
+            KategoriView kategoriView = new KategoriView();
+            kategoriView.setVisible(true);
+            kategoriView.setLocationRelativeTo(null); // Agar muncul di tengah layar
+
+            // Tutup frame login
+            this.dispose();
+
+            
         } else {
             JOptionPane.showMessageDialog(this, "Login gagal. Username atau password salah.", "Error", JOptionPane.ERROR_MESSAGE);
         }

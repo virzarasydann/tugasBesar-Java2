@@ -4,6 +4,12 @@
  */
 package com.tugas.besar.View.Pegawai;
 
+import com.tugas.besar.Controller.Pegawai.KategoriController;
+import com.tugas.besar.Model.Pegawai.Kategori;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author silvi
@@ -17,6 +23,7 @@ public class KategoriView extends javax.swing.JFrame {
      */
     public KategoriView() {
         initComponents();
+        loadKategoriTable();
     }
 
     /**
@@ -80,6 +87,11 @@ public class KategoriView extends javax.swing.JFrame {
 
         tfnamakategori.setFont(new java.awt.Font("Sans Serif Collection", 0, 12)); // NOI18N
         tfnamakategori.setText("Masukkan Nama Kategori");
+        tfnamakategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfnamakategoriActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel3.setText("Nama Kategori");
@@ -103,6 +115,11 @@ public class KategoriView extends javax.swing.JFrame {
         tfsimpankategori.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         tfsimpankategori.setForeground(new java.awt.Color(255, 255, 255));
         tfsimpankategori.setText("Simpan Kategori");
+        tfsimpankategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfsimpankategoriActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -156,7 +173,7 @@ public class KategoriView extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfnamakategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(79, 79, 79)
                 .addComponent(tfsimpankategori, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,8 +205,51 @@ public class KategoriView extends javax.swing.JFrame {
     }//GEN-LAST:event_tfeditkategoriActionPerformed
 
     private void btntambahkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntambahkategoriActionPerformed
-        // TODO add your handling code here:
+        String namaKategori = tfnamakategori.getText().trim();
+
+        if (namaKategori.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama kategori tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        KategoriController controller = new KategoriController();
+        boolean sukses = controller.create(namaKategori);
+
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Kategori berhasil disimpan.");
+            tfnamakategori.setText(""); // Kosongkan field
+            loadKategoriTable(); // Refresh isi tabel
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan kategori.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btntambahkategoriActionPerformed
+
+    private void tfnamakategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfnamakategoriActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfnamakategoriActionPerformed
+
+    private void tfsimpankategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfsimpankategoriActionPerformed
+        
+    }//GEN-LAST:event_tfsimpankategoriActionPerformed
+    private void loadKategoriTable() {
+        KategoriController controller = new KategoriController();
+        List<Kategori> daftarKategori = controller.read();
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No");
+        model.addColumn("Nama");
+        
+        int no = 1;
+        for (Kategori kategori : daftarKategori) {
+            model.addRow(new Object[]{
+                no++,
+                kategori.getNama(),
+              
+            });
+        }
+
+        tablekategori.setModel(model);
+    }
 
     /**
      * @param args the command line arguments
