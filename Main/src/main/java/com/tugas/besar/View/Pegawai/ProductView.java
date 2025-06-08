@@ -56,6 +56,11 @@ public class ProductView extends javax.swing.JFrame {
         btntambahproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         btntambahproduk.setForeground(new java.awt.Color(255, 255, 255));
         btntambahproduk.setText("Tambah Produk");
+        btntambahproduk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntambahprodukActionPerformed(evt);
+            }
+        });
 
         tableproduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,6 +205,10 @@ public class ProductView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btntambahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntambahprodukActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btntambahprodukActionPerformed
 
     /**
      * @param args the command line arguments
