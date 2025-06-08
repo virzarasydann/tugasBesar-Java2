@@ -5,15 +5,17 @@
 package com.tugas.besar.View.Pegawai;
 
 import com.tugas.besar.Controller.Pegawai.KategoriController;
+import com.tugas.besar.Controller.Pegawai.ProductController;
 import com.tugas.besar.Model.Pegawai.Kategori;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author silvi
  */
 public class ProductView extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProductView.class.getName());
 
     /**
@@ -48,6 +50,12 @@ public class ProductView extends javax.swing.JFrame {
         tfeditproduk = new javax.swing.JTextField();
         tfhapusproduk = new javax.swing.JTextField();
         tfsimpanproduk = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menutransaksi = new javax.swing.JMenu();
+        menuproduk = new javax.swing.JMenu();
+        menukategori = new javax.swing.JMenu();
+        menuriwayat = new javax.swing.JMenu();
+        menuoperasional = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +120,11 @@ public class ProductView extends javax.swing.JFrame {
         tfeditproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         tfeditproduk.setForeground(new java.awt.Color(255, 255, 255));
         tfeditproduk.setText("Edit Produk");
+        tfeditproduk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfeditprodukActionPerformed(evt);
+            }
+        });
 
         tfhapusproduk.setBackground(new java.awt.Color(255, 102, 102));
         tfhapusproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
@@ -196,6 +209,23 @@ public class ProductView extends javax.swing.JFrame {
                 .addGap(82, 82, 82))
         );
 
+        menutransaksi.setText("Transaksi");
+        jMenuBar1.add(menutransaksi);
+
+        menuproduk.setText("Produk");
+        jMenuBar1.add(menuproduk);
+
+        menukategori.setText("Kategori");
+        jMenuBar1.add(menukategori);
+
+        menuriwayat.setText("Riwayat");
+        jMenuBar1.add(menuriwayat);
+
+        menuoperasional.setText("Operasional");
+        jMenuBar1.add(menuoperasional);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,8 +249,25 @@ public class ProductView extends javax.swing.JFrame {
     private void btntambahprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntambahprodukActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btntambahprodukActionPerformed
+
+
+    private void tfeditprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfeditprodukActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfeditprodukActionPerformed
+
     private void cmbkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbkategoriActionPerformed
         // TODO add your handling code here:
+        String namaProduct = tfnamaproduk.getText().trim();
+        String kategoriId = (String) cmbkategori.getSelectedItem();
+        String harga = tfharga.getText().trim();
+
+        if (namaProduct.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama product tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        ProductController controller = new ProductController();
+        boolean sukses = controller.create(namaProduct, harga, kategoriId);
+
     }//GEN-LAST:event_cmbkategoriActionPerformed
     private void loadKategoriToComboBox() {
         cmbkategori.removeAllItems(); // Hapus isi sebelumnya
@@ -265,8 +312,14 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu menukategori;
+    private javax.swing.JMenu menuoperasional;
+    private javax.swing.JMenu menuproduk;
+    private javax.swing.JMenu menuriwayat;
+    private javax.swing.JMenu menutransaksi;
     private javax.swing.JTable tableproduk;
     private javax.swing.JTextField tfeditproduk;
     private javax.swing.JTextField tfhapusproduk;

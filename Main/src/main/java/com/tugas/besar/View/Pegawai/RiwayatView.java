@@ -43,6 +43,12 @@ public class RiwayatView extends javax.swing.JFrame {
         tfeditproduk = new javax.swing.JTextField();
         tfhapusproduk = new javax.swing.JTextField();
         tfsimpanproduk = new javax.swing.JTextField();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menutransaksi = new javax.swing.JMenu();
+        menuproduk = new javax.swing.JMenu();
+        menukategori = new javax.swing.JMenu();
+        menuriwayat = new javax.swing.JMenu();
+        menuoperasional = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -181,6 +187,23 @@ public class RiwayatView extends javax.swing.JFrame {
                 .addGap(82, 82, 82))
         );
 
+        menutransaksi.setText("Transaksi");
+        jMenuBar1.add(menutransaksi);
+
+        menuproduk.setText("Produk");
+        jMenuBar1.add(menuproduk);
+
+        menukategori.setText("Kategori");
+        jMenuBar1.add(menukategori);
+
+        menuriwayat.setText("Riwayat");
+        jMenuBar1.add(menuriwayat);
+
+        menuoperasional.setText("Operasional");
+        jMenuBar1.add(menuoperasional);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,8 +257,14 @@ public class RiwayatView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu menukategori;
+    private javax.swing.JMenu menuoperasional;
+    private javax.swing.JMenu menuproduk;
+    private javax.swing.JMenu menuriwayat;
+    private javax.swing.JMenu menutransaksi;
     private javax.swing.JTable tableproduk;
     private javax.swing.JTextField tfeditproduk;
     private javax.swing.JTextField tfhapusproduk;
