@@ -49,12 +49,12 @@ public class KategoriDAO {
         try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 Kategori kategori = new Kategori(
-                    
+                    rs.getInt("id"),
                     rs.getString("nama"),
                     rs.getTimestamp("created_at"),
                     rs.getTimestamp("updated_at")
                 );
-                kategori.setId(rs.getInt("id"));
+                
                 list.add(kategori);
             }
         } catch (SQLException e) {

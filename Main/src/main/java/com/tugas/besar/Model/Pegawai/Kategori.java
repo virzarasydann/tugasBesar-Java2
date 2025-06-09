@@ -16,15 +16,31 @@ public class Kategori {
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    public Kategori(String nama, Timestamp createdAt, Timestamp updatedAt) {
-        
+    public Kategori(int id,String nama, Timestamp createdAt, Timestamp updatedAt) {
+        this.id = id;
         this.nama = nama;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
     
+     public Kategori(String nama, Timestamp createdAt, Timestamp updatedAt) {
+        
+        this.nama = nama;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+     
+     public Kategori(String nama) {
+        
+        this.nama = nama;
+        
+    }
     
-
+    
+    @Override
+    public String toString() {
+        return nama; // Ini akan ditampilkan di JComboBox
+    }
     public int getId() {
         return id;
     }

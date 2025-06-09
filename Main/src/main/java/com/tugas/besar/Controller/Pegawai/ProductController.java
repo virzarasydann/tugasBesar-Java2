@@ -16,24 +16,31 @@ import java.util.List;
  */
 public class ProductController {
     
-    public void create(String nama, int harga, int kategoriId){
-        Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+    public List<Product> read() {
         ProductDAO productDAO = new ProductDAO();
-
-        Product newProduct = new Product(nama, harga, timeNow, timeNow, kategoriId);
-
-        if (productDAO.insert(newProduct)) {
-            System.out.println("Produk berhasil disimpan.");
-        } else {
-            System.err.println("Gagal menyimpan produk.");
-        }
-        
-        
-        
-        
+        return productDAO.get();
     }
 
-    public boolean create(String namaProduct, String harga, String kategoriId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean create(String nama, int harga, int kategoriId) {
+        Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+        Product newProduct = new Product(nama, harga,  timeNow, timeNow,kategoriId);
+        ProductDAO productDAO = new ProductDAO();
+        return productDAO.insert(newProduct);
     }
+
+    public boolean update(int id, String namaBaru, int hargaBaru, int kategoriIdBaru) {
+        ProductDAO productDAO = new ProductDAO();
+        Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+
+        Product product = new Product(namaBaru, hargaBaru,  timeNow, timeNow,kategoriIdBaru);
+        product.setId(id);
+
+        return productDAO.update(product);
+    }
+
+    public boolean delete(int id) {
+        ProductDAO productDAO = new ProductDAO();
+        return productDAO.delete(id);
+    }
+
 }

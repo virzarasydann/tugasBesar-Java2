@@ -1,6 +1,7 @@
 package com.tugas.besar.DataAccesObject.Pegawai;
 
 import com.tugas.besar.Model.Pegawai.Product;
+import com.tugas.besar.Model.Pegawai.Kategori;
 import com.tugas.besar.DataAccesObject.DatabaseConnection;
 
 import java.sql.*;
@@ -80,6 +81,26 @@ public class ProductDAO {
             }
         } catch (SQLException e) {
             System.err.println("Fetch product by ID failed: " + e.getMessage());
+        }
+
+        return null;
+    }
+    
+    public Kategori getKategoriById(int id) {
+        String sql = "SELECT * FROM kategori WHERE id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Kategori(
+                        
+                        rs.getString("nama")
+                        
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println("Fetch kategori by ID failed: " + e.getMessage());
         }
 
         return null;

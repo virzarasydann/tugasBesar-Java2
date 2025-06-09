@@ -28,6 +28,8 @@ public class Product {
         this.updatedAt = updatedAt;
         this.kategoriId = kategoriId;
     }
+    
+    
 
     public int getId() {
         return id;
@@ -76,6 +78,8 @@ public class Product {
     public void setKategoriId(int kategoriId) {
         this.kategoriId = kategoriId;
     }
-
+    
+    
+    
     
 }
