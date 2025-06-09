@@ -1,42 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
-  <NonVisualComponents>
-    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
-      <SubComponents>
-        <Menu class="javax.swing.JMenu" name="menutransaksi">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Transaksi"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menuproduk">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Produk"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menukategori">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Kategori"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menuriwayat">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Riwayat"/>
-          </Properties>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="menuoperasional">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Operasional"/>
-          </Properties>
-        </Menu>
-      </SubComponents>
-    </Menu>
-  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -59,11 +27,18 @@
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -79,9 +54,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="tfsimpanoperasional" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="266" max="-2" attributes="0"/>
+                          <Component id="btntambahoperasional" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnedit" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnhapus" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -97,32 +76,28 @@
                                   <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                                  <Component id="tfharga" min="-2" pref="217" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                                                  <Group type="102" alignment="0" attributes="0">
+                                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                                      <Component id="tfharga" min="-2" pref="217" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                                  <Component id="tfnamaoperasional" min="-2" pref="220" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <Group type="102" alignment="1" attributes="0">
-                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                              <Component id="tfnamaoperasional" min="-2" pref="220" max="-2" attributes="0"/>
-                                          </Group>
+                                          <EmptySpace min="-2" pref="285" max="-2" attributes="0"/>
+                                          <Component id="tfsimpanoperasional" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jLabel2" min="-2" pref="183" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="266" max="-2" attributes="0"/>
-                                  <Component id="btntambahoperasional" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="tfeditkategori" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="tfhapusoperasional" min="-2" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
-                          <EmptySpace min="0" pref="3" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -136,13 +111,15 @@
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="54" max="-2" attributes="0"/>
-                  <EmptySpace pref="32" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tfeditkategori" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                      <Component id="btntambahoperasional" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                      <Component id="tfhapusoperasional" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="btnhapus" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="btnedit" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="btntambahoperasional" min="-2" pref="33" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="tfsimpanoperasional" min="-2" pref="33" max="-2" attributes="0"/>
@@ -261,7 +238,21 @@
             <Property name="text" type="java.lang.String" value="Masukkan Harga"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfeditkategori">
+        <Component class="javax.swing.JTextField" name="tfsimpanoperasional">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="66" red="66" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Sans Serif Collection" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Simpan Operasional"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnedit">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="cc" red="ff" type="rgb"/>
@@ -275,7 +266,7 @@
             <Property name="text" type="java.lang.String" value="Edit Operasional"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfhapusoperasional">
+        <Component class="javax.swing.JButton" name="btnhapus">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="ff" type="rgb"/>
@@ -289,18 +280,88 @@
             <Property name="text" type="java.lang.String" value="Hapus Operasional"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfsimpanoperasional">
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnmenutransaksi" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnmenuproduk" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnmenukategori" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnmenuriwayat" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnmenuoperasional" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnmenukategori" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="btnmenuriwayat" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="btnmenuproduk" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="btnmenutransaksi" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="btnmenuoperasional" alignment="1" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btnmenukategori">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="66" red="66" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Sans Serif Collection" size="14" style="1"/>
             </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            <Property name="text" type="java.lang.String" value="Kategori"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnmenuriwayat">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Sans Serif Collection" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Simpan Operasional"/>
+            <Property name="text" type="java.lang.String" value="Riwayat"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnmenuproduk">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Sans Serif Collection" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Produk"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnmenutransaksi">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Sans Serif Collection" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Transaksi"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnmenuoperasional">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Sans Serif Collection" size="14" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Operasional"/>
           </Properties>
         </Component>
       </SubComponents>

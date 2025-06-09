@@ -3,7 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.tugas.besar.View.Pegawai;
-
+import com.tugas.besar.View.Pegawai.ProductView;
+import com.tugas.besar.View.Pegawai.KategoriView;
+import com.tugas.besar.View.Pegawai.TransaksiView;
+import com.tugas.besar.View.Pegawai.RiwayatView;
+import com.tugas.besar.View.Pegawai.OperasionalView;
 import com.tugas.besar.Controller.Pegawai.KategoriController;
 import com.tugas.besar.Model.Pegawai.Kategori;
 import java.util.List;
@@ -45,15 +49,15 @@ public class ProductView extends javax.swing.JFrame {
         cmbkategori = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         tfharga = new javax.swing.JTextField();
-        tfeditproduk = new javax.swing.JTextField();
-        tfhapusproduk = new javax.swing.JTextField();
         tfsimpanproduk = new javax.swing.JTextField();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        menutransaksi = new javax.swing.JMenu();
-        menuproduk = new javax.swing.JMenu();
-        menukategori = new javax.swing.JMenu();
-        menuriwayat = new javax.swing.JMenu();
-        menuoperasional = new javax.swing.JMenu();
+        jPanel4 = new javax.swing.JPanel();
+        btnmenukategori2 = new javax.swing.JButton();
+        btnmenuriwayat2 = new javax.swing.JButton();
+        btnmenuproduk2 = new javax.swing.JButton();
+        btnmenutransaksi2 = new javax.swing.JButton();
+        btnmenuoperasional2 = new javax.swing.JButton();
+        btnedit = new javax.swing.JButton();
+        btnhapus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -109,81 +113,124 @@ public class ProductView extends javax.swing.JFrame {
 
         tfharga.setText("Masukkan Harga");
 
-        tfeditproduk.setBackground(new java.awt.Color(255, 204, 102));
-        tfeditproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
-        tfeditproduk.setForeground(new java.awt.Color(255, 255, 255));
-        tfeditproduk.setText("Edit Produk");
-        tfeditproduk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfeditprodukActionPerformed(evt);
-            }
-        });
-
-        tfhapusproduk.setBackground(new java.awt.Color(255, 102, 102));
-        tfhapusproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
-        tfhapusproduk.setForeground(new java.awt.Color(255, 255, 255));
-        tfhapusproduk.setText("Hapus Produk");
-
         tfsimpanproduk.setBackground(new java.awt.Color(102, 102, 255));
         tfsimpanproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         tfsimpanproduk.setForeground(new java.awt.Color(255, 255, 255));
         tfsimpanproduk.setText("Simpan Produk");
+
+        btnmenukategori2.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenukategori2.setText("Kategori");
+
+        btnmenuriwayat2.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuriwayat2.setText("Riwayat");
+
+        btnmenuproduk2.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuproduk2.setText("Produk");
+
+        btnmenutransaksi2.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenutransaksi2.setText("Transaksi");
+
+        btnmenuoperasional2.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuoperasional2.setText("Operasional");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnmenutransaksi2)
+                .addGap(18, 18, 18)
+                .addComponent(btnmenuproduk2)
+                .addGap(18, 18, 18)
+                .addComponent(btnmenukategori2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnmenuriwayat2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnmenuoperasional2)
+                .addGap(11, 11, 11))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnmenukategori2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenuriwayat2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenuproduk2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenutransaksi2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnmenuoperasional2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        btnedit.setBackground(new java.awt.Color(255, 153, 102));
+        btnedit.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnedit.setForeground(new java.awt.Color(255, 255, 255));
+        btnedit.setText("Edit Produk");
+
+        btnhapus.setBackground(new java.awt.Color(255, 102, 102));
+        btnhapus.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnhapus.setForeground(new java.awt.Color(255, 255, 255));
+        btnhapus.setText("Hapus Produk");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(251, 251, 251)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfsimpanproduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btntambahproduk)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfeditproduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfhapusproduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfharga, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cmbkategori, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tfnamaproduk, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
+                                .addGap(278, 278, 278)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfsimpanproduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(tfharga, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(cmbkategori, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(tfnamaproduk, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 65, Short.MAX_VALUE)))))
-                .addGap(14, 14, 14))
+                                        .addComponent(btntambahproduk)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnedit)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btnhapus))))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(61, 61, 61)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfeditproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btntambahproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfhapusproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(24, 24, 24)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btntambahproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfnamaproduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,54 +242,29 @@ public class ProductView extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfharga, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
                 .addComponent(tfsimpanproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82))
+                .addContainerGap())
         );
-
-        menutransaksi.setText("Transaksi");
-        jMenuBar1.add(menutransaksi);
-
-        menuproduk.setText("Produk");
-        jMenuBar1.add(menuproduk);
-
-        menukategori.setText("Kategori");
-        jMenuBar1.add(menukategori);
-
-        menuriwayat.setText("Riwayat");
-        jMenuBar1.add(menuriwayat);
-
-        menuoperasional.setText("Operasional");
-        jMenuBar1.add(menuoperasional);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-    private void tfeditprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfeditprodukActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfeditprodukActionPerformed
 
     private void cmbkategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbkategoriActionPerformed
         // TODO add your handling code here:
@@ -284,6 +306,13 @@ public class ProductView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnedit;
+    private javax.swing.JButton btnhapus;
+    private javax.swing.JButton btnmenukategori2;
+    private javax.swing.JButton btnmenuoperasional2;
+    private javax.swing.JButton btnmenuproduk2;
+    private javax.swing.JButton btnmenuriwayat2;
+    private javax.swing.JButton btnmenutransaksi2;
     private javax.swing.JButton btntambahproduk;
     private javax.swing.JComboBox<String> cmbkategori;
     private javax.swing.JLabel jLabel1;
@@ -291,17 +320,10 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenu menukategori;
-    private javax.swing.JMenu menuoperasional;
-    private javax.swing.JMenu menuproduk;
-    private javax.swing.JMenu menuriwayat;
-    private javax.swing.JMenu menutransaksi;
     private javax.swing.JTable tableproduk;
-    private javax.swing.JTextField tfeditproduk;
-    private javax.swing.JTextField tfhapusproduk;
     private javax.swing.JTextField tfharga;
     private javax.swing.JTextField tfnamaproduk;
     private javax.swing.JTextField tfsimpanproduk;
