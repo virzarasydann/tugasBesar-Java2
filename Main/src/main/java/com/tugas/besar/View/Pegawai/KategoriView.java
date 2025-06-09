@@ -12,6 +12,12 @@ import java.sql.PreparedStatement;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import com.tugas.besar.View.Pegawai.ProductView;
+import com.tugas.besar.View.Pegawai.KategoriView;
+import com.tugas.besar.View.Pegawai.TransaksiView;
+import com.tugas.besar.View.Pegawai.RiwayatView;
+import com.tugas.besar.View.Pegawai.OperasionalView;
+
 
 /**
  *
@@ -27,8 +33,12 @@ public class KategoriView extends javax.swing.JFrame {
     public KategoriView() {
         initComponents();
         loadKategoriTable();
+        setTitle("Halaman Kategori");
+        setSize(600, 400);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,12 +59,12 @@ public class KategoriView extends javax.swing.JFrame {
         tablekategori = new javax.swing.JTable();
         btnedit = new javax.swing.JButton();
         btnhapus = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        menutransaksi = new javax.swing.JMenu();
-        menuproduk = new javax.swing.JMenu();
-        menukategori = new javax.swing.JMenu();
-        menuriwayat = new javax.swing.JMenu();
-        menuoperasional = new javax.swing.JMenu();
+        jPanel2 = new javax.swing.JPanel();
+        btnmenukategori = new javax.swing.JButton();
+        btnmenuriwayat = new javax.swing.JButton();
+        btnmenuproduk = new javax.swing.JButton();
+        btnmenutransaksi = new javax.swing.JButton();
+        btnmenuoperasional = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,104 +145,155 @@ public class KategoriView extends javax.swing.JFrame {
             }
         });
 
+        btnmenukategori.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenukategori.setText("Kategori");
+        btnmenukategori.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenukategoriActionPerformed(evt);
+            }
+        });
+
+        btnmenuriwayat.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuriwayat.setText("Riwayat");
+        btnmenuriwayat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuriwayatActionPerformed(evt);
+            }
+        });
+
+        btnmenuproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuproduk.setText("Produk");
+        btnmenuproduk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuprodukActionPerformed(evt);
+            }
+        });
+
+        btnmenutransaksi.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenutransaksi.setText("Transaksi");
+        btnmenutransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenutransaksiActionPerformed(evt);
+            }
+        });
+
+        btnmenuoperasional.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuoperasional.setText("Operasional");
+        btnmenuoperasional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmenuoperasionalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnmenutransaksi)
+                .addGap(18, 18, 18)
+                .addComponent(btnmenuproduk)
+                .addGap(18, 18, 18)
+                .addComponent(btnmenukategori)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnmenuriwayat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnmenuoperasional)
+                .addGap(11, 11, 11))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnmenukategori, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenuriwayat, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenuproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenutransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addComponent(btnmenuoperasional, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(245, 245, 245))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(tfsimpankategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btntambahkategori)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnhapus)
-                                    .addGap(22, 22, 22))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(12, 12, 12)
-                                            .addComponent(tfnamakategori, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel3))
-                                    .addGap(0, 0, Short.MAX_VALUE))))
-                        .addGap(35, 35, 35))))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(btntambahkategori)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfsimpankategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnhapus))))
+                .addGap(0, 43, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(tfnamakategori, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
+                .addGap(16, 16, 16)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel3)
+                        .addGap(21, 21, 21))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel1)
+                        .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btntambahkategori, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(24, 24, 24)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)))
                 .addComponent(tfnamakategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(8, 8, 8)
                 .addComponent(tfsimpankategori, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addGap(237, 237, 237))
         );
-
-        menutransaksi.setText("Transaksi");
-        menutransaksi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menutransaksiActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(menutransaksi);
-
-        menuproduk.setText("Produk");
-        jMenuBar1.add(menuproduk);
-
-        menukategori.setText("Kategori");
-        jMenuBar1.add(menukategori);
-
-        menuriwayat.setText("Riwayat");
-        jMenuBar1.add(menuriwayat);
-
-        menuoperasional.setText("Operasional");
-        jMenuBar1.add(menuoperasional);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -269,10 +330,6 @@ public class KategoriView extends javax.swing.JFrame {
 
     
     
-    private void menutransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menutransaksiActionPerformed
-        
-    }//GEN-LAST:event_menutransaksiActionPerformed
-
     private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btneditActionPerformed
@@ -322,6 +379,41 @@ public class KategoriView extends javax.swing.JFrame {
         }
     }
     }//GEN-LAST:event_btnhapusActionPerformed
+
+    private void btnmenutransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenutransaksiActionPerformed
+    TransaksiView transaksiFrame = new TransaksiView();
+    transaksiFrame.setVisible(true);
+    transaksiFrame.setLocationRelativeTo(null);
+    this.dispose();
+    }//GEN-LAST:event_btnmenutransaksiActionPerformed
+
+    private void btnmenuprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuprodukActionPerformed
+    ProductView productFrame = new ProductView();
+    productFrame.setVisible(true);
+    productFrame.setLocationRelativeTo(null);
+    this.dispose();
+    }//GEN-LAST:event_btnmenuprodukActionPerformed
+
+    private void btnmenukategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenukategoriActionPerformed
+    KategoriView kategoriFrame = new KategoriView();
+    kategoriFrame.setVisible(true);
+    kategoriFrame.setLocationRelativeTo(null);
+    this.dispose();
+    }//GEN-LAST:event_btnmenukategoriActionPerformed
+
+    private void btnmenuriwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuriwayatActionPerformed
+    RiwayatView riwayatFrame = new RiwayatView();
+    riwayatFrame.setVisible(true);
+    riwayatFrame.setLocationRelativeTo(null);
+    this.dispose();
+    }//GEN-LAST:event_btnmenuriwayatActionPerformed
+
+    private void btnmenuoperasionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuoperasionalActionPerformed
+    OperasionalView operasionalFrame = new OperasionalView();
+    operasionalFrame.setVisible(true);
+    operasionalFrame.setLocationRelativeTo(null);
+    this.dispose();
+    }//GEN-LAST:event_btnmenuoperasionalActionPerformed
     private void loadKategoriTable() {
         KategoriController controller = new KategoriController();
         List<Kategori> daftarKategori = controller.read();
@@ -370,18 +462,18 @@ public class KategoriView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnedit;
     private javax.swing.JButton btnhapus;
+    private javax.swing.JButton btnmenukategori;
+    private javax.swing.JButton btnmenuoperasional;
+    private javax.swing.JButton btnmenuproduk;
+    private javax.swing.JButton btnmenuriwayat;
+    private javax.swing.JButton btnmenutransaksi;
     private javax.swing.JButton btntambahkategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenu menukategori;
-    private javax.swing.JMenu menuoperasional;
-    private javax.swing.JMenu menuproduk;
-    private javax.swing.JMenu menuriwayat;
-    private javax.swing.JMenu menutransaksi;
     private javax.swing.JTable tablekategori;
     private javax.swing.JTextField tfnamakategori;
     private javax.swing.JTextField tfsimpankategori;

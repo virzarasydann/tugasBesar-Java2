@@ -3,6 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.tugas.besar.View.Pegawai;
+import com.tugas.besar.View.Pegawai.ProductView;
+import com.tugas.besar.View.Pegawai.KategoriView;
+import com.tugas.besar.View.Pegawai.TransaksiView;
+import com.tugas.besar.View.Pegawai.RiwayatView;
+import com.tugas.besar.View.Pegawai.OperasionalView;
+
 
 /**
  *
@@ -38,15 +44,15 @@ public class OperasionalView extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tfharga = new javax.swing.JTextField();
-        tfeditkategori = new javax.swing.JTextField();
-        tfhapusoperasional = new javax.swing.JTextField();
         tfsimpanoperasional = new javax.swing.JTextField();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        menutransaksi = new javax.swing.JMenu();
-        menuproduk = new javax.swing.JMenu();
-        menukategori = new javax.swing.JMenu();
-        menuriwayat = new javax.swing.JMenu();
-        menuoperasional = new javax.swing.JMenu();
+        btnedit = new javax.swing.JButton();
+        btnhapus = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        btnmenukategori = new javax.swing.JButton();
+        btnmenuriwayat = new javax.swing.JButton();
+        btnmenuproduk = new javax.swing.JButton();
+        btnmenutransaksi = new javax.swing.JButton();
+        btnmenuoperasional = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,20 +98,20 @@ public class OperasionalView extends javax.swing.JFrame {
 
         tfharga.setText("Masukkan Harga");
 
-        tfeditkategori.setBackground(new java.awt.Color(255, 204, 102));
-        tfeditkategori.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
-        tfeditkategori.setForeground(new java.awt.Color(255, 255, 255));
-        tfeditkategori.setText("Edit Operasional");
-
-        tfhapusoperasional.setBackground(new java.awt.Color(255, 102, 102));
-        tfhapusoperasional.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
-        tfhapusoperasional.setForeground(new java.awt.Color(255, 255, 255));
-        tfhapusoperasional.setText("Hapus Operasional");
-
         tfsimpanoperasional.setBackground(new java.awt.Color(102, 102, 255));
         tfsimpanoperasional.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         tfsimpanoperasional.setForeground(new java.awt.Color(255, 255, 255));
         tfsimpanoperasional.setText("Simpan Operasional");
+
+        btnedit.setBackground(new java.awt.Color(255, 204, 102));
+        btnedit.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnedit.setForeground(new java.awt.Color(255, 255, 255));
+        btnedit.setText("Edit Operasional");
+
+        btnhapus.setBackground(new java.awt.Color(255, 102, 102));
+        btnhapus.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnhapus.setForeground(new java.awt.Color(255, 255, 255));
+        btnhapus.setText("Hapus Operasional");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,9 +119,13 @@ public class OperasionalView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tfsimpanoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addComponent(btntambahoperasional)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnedit)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnhapus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -128,24 +138,20 @@ public class OperasionalView extends javax.swing.JFrame {
                                 .addGap(69, 69, 69)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addGap(12, 12, 12)
+                                                    .addComponent(tfharga, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel5))
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(12, 12, 12)
-                                                .addComponent(tfharga, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel5))
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(12, 12, 12)
-                                            .addComponent(tfnamaoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(266, 266, 266)
-                                .addComponent(btntambahoperasional)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfeditkategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfhapusoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 3, Short.MAX_VALUE)))
+                                                .addComponent(tfnamaoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(285, 285, 285)
+                                        .addComponent(tfsimpanoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -155,12 +161,13 @@ public class OperasionalView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfeditkategori, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btntambahoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfhapusoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnedit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(btntambahoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(tfsimpanoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,22 +185,53 @@ public class OperasionalView extends javax.swing.JFrame {
                 .addGap(71, 71, 71))
         );
 
-        menutransaksi.setText("Transaksi");
-        jMenuBar1.add(menutransaksi);
+        btnmenukategori.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenukategori.setText("Kategori");
 
-        menuproduk.setText("Produk");
-        jMenuBar1.add(menuproduk);
+        btnmenuriwayat.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuriwayat.setText("Riwayat");
 
-        menukategori.setText("Kategori");
-        jMenuBar1.add(menukategori);
+        btnmenuproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuproduk.setText("Produk");
 
-        menuriwayat.setText("Riwayat");
-        jMenuBar1.add(menuriwayat);
+        btnmenutransaksi.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenutransaksi.setText("Transaksi");
 
-        menuoperasional.setText("Operasional");
-        jMenuBar1.add(menuoperasional);
+        btnmenuoperasional.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnmenuoperasional.setText("Operasional");
 
-        setJMenuBar(jMenuBar1);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnmenutransaksi)
+                .addGap(18, 18, 18)
+                .addComponent(btnmenuproduk)
+                .addGap(18, 18, 18)
+                .addComponent(btnmenukategori)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnmenuriwayat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnmenuoperasional)
+                .addGap(11, 11, 11))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnmenukategori, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenuriwayat, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenuproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnmenutransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnmenuoperasional, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,11 +240,17 @@ public class OperasionalView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -240,22 +284,22 @@ public class OperasionalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnedit;
+    private javax.swing.JButton btnhapus;
+    private javax.swing.JButton btnmenukategori;
+    private javax.swing.JButton btnmenuoperasional;
+    private javax.swing.JButton btnmenuproduk;
+    private javax.swing.JButton btnmenuriwayat;
+    private javax.swing.JButton btnmenutransaksi;
     private javax.swing.JButton btntambahoperasional;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenu menukategori;
-    private javax.swing.JMenu menuoperasional;
-    private javax.swing.JMenu menuproduk;
-    private javax.swing.JMenu menuriwayat;
-    private javax.swing.JMenu menutransaksi;
     private javax.swing.JTable tableoperasional;
-    private javax.swing.JTextField tfeditkategori;
-    private javax.swing.JTextField tfhapusoperasional;
     private javax.swing.JTextField tfharga;
     private javax.swing.JTextField tfnamaoperasional;
     private javax.swing.JTextField tfsimpanoperasional;
