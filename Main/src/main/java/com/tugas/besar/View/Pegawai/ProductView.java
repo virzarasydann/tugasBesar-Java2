@@ -23,6 +23,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -31,7 +32,8 @@ import javax.swing.table.DefaultTableModel;
 public class ProductView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ProductView.class.getName());
-
+    private int id;
+    private int kategoriId;
     /**
      * Creates new form ProductView
      */
@@ -66,7 +68,6 @@ public class ProductView extends javax.swing.JFrame {
         cmbkategori = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         tfharga = new javax.swing.JTextField();
-        tfsimpanproduk = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         btnmenukategori2 = new javax.swing.JButton();
         btnmenuriwayat2 = new javax.swing.JButton();
@@ -75,6 +76,7 @@ public class ProductView extends javax.swing.JFrame {
         btnmenuoperasional2 = new javax.swing.JButton();
         btnedit = new javax.swing.JButton();
         btnhapus = new javax.swing.JButton();
+        setText = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,11 +142,6 @@ public class ProductView extends javax.swing.JFrame {
         jLabel5.setText("Harga");
 
         tfharga.setText("Masukkan Harga");
-
-        tfsimpanproduk.setBackground(new java.awt.Color(102, 102, 255));
-        tfsimpanproduk.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
-        tfsimpanproduk.setForeground(new java.awt.Color(255, 255, 255));
-        tfsimpanproduk.setText("Simpan Produk");
 
         btnmenukategori2.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         btnmenukategori2.setText("Kategori");
@@ -221,11 +218,28 @@ public class ProductView extends javax.swing.JFrame {
         btnedit.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         btnedit.setForeground(new java.awt.Color(255, 255, 255));
         btnedit.setText("Edit Produk");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
 
         btnhapus.setBackground(new java.awt.Color(255, 102, 102));
         btnhapus.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         btnhapus.setForeground(new java.awt.Color(255, 255, 255));
         btnhapus.setText("Hapus Produk");
+        btnhapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhapusActionPerformed(evt);
+            }
+        });
+
+        setText.setText("set Text");
+        setText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setTextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -247,19 +261,18 @@ public class ProductView extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(278, 278, 278)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(tfsimpanproduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(btntambahproduk)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnedit)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnhapus))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(61, 61, 61)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(278, 278, 278)
+                                .addComponent(btntambahproduk)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnedit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(setText)
+                                    .addComponent(btnhapus)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -293,9 +306,9 @@ public class ProductView extends javax.swing.JFrame {
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tfharga, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(tfsimpanproduk, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(29, 29, 29)
+                .addComponent(setText)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -333,7 +346,7 @@ public class ProductView extends javax.swing.JFrame {
         }
 
         Kategori selectedKategori = (Kategori) cmbkategori.getSelectedItem();
-        int kategoriId = selectedKategori.getId();
+        this.kategoriId = selectedKategori.getId();
 
         int hargaToInt;
         try {
@@ -352,6 +365,7 @@ public class ProductView extends javax.swing.JFrame {
         }
 
         JOptionPane.showMessageDialog(this, "Produk berhasil disimpan.");
+        loadTableProduk();
         tfnamaproduk.setText(""); 
         tfharga.setText("");
     }//GEN-LAST:event_btntambahprodukActionPerformed
@@ -383,7 +397,7 @@ public class ProductView extends javax.swing.JFrame {
         for (Product produk : daftarProduk) {
             Object[] baris = {
 //                produk.getId(),
-                produk.getNama(),
+                produk,
                 produk.getHarga(),
                 getKategori.getKategoriById(produk.getKategoriId())
                 
@@ -434,6 +448,124 @@ public class ProductView extends javax.swing.JFrame {
     operasionalFrame.setLocationRelativeTo(null);
     this.dispose();
     }//GEN-LAST:event_btnmenuoperasional2ActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        String namaProduct = tfnamaproduk.getText().trim();
+        String hargaText = tfharga.getText().trim();
+
+        if (namaProduct.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama product tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (cmbkategori.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Silakan pilih kategori.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int kategoriId;
+
+     
+        if (cmbkategori.getSelectedItem() instanceof Kategori) {
+            kategoriId = ((Kategori) cmbkategori.getSelectedItem()).getId();
+        } else {
+            kategoriId = this.kategoriId; 
+        }
+
+        int hargaToInt;
+        try {
+            hargaToInt = Integer.parseInt(hargaText);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Harga harus berupa angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ProductController controller = new ProductController();
+        boolean sukses = controller.update(this.id, namaProduct, hargaToInt, kategoriId);
+
+        if (!sukses){
+            JOptionPane.showMessageDialog(this, "Gagal mengupdate Produk.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "Produk berhasil di update.");
+        loadTableProduk();
+        tfnamaproduk.setText(""); 
+        tfharga.setText("");
+    }//GEN-LAST:event_btneditActionPerformed
+
+    private void setTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setTextActionPerformed
+        TableModel model = tableproduk.getModel();
+        int[] selectedRows = tableproduk.getSelectedRows();
+
+        if (selectedRows.length > 0) {
+            int row = selectedRows[0];
+
+            Product produk = (Product) model.getValueAt(row, 0);
+            String harga = model.getValueAt(row, 1).toString();
+
+            tfnamaproduk.setText(produk.getNama());
+            tfharga.setText(harga);
+            this.id = produk.getId();
+
+            this.kategoriId = produk.getKategoriId(); 
+
+            // Cari dan set kategori yang sesuai berdasarkan ID
+            for (int i = 0; i < cmbkategori.getItemCount(); i++) {
+                Kategori item = cmbkategori.getItemAt(i);
+                if (item.getId() == this.kategoriId) {
+                    cmbkategori.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_setTextActionPerformed
+
+    private void btnhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapusActionPerformed
+        String namaProduct = tfnamaproduk.getText().trim();
+        String hargaText = tfharga.getText().trim();
+
+        if (namaProduct.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama product tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (cmbkategori.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Silakan pilih kategori.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int kategoriId;
+
+     
+        if (cmbkategori.getSelectedItem() instanceof Kategori) {
+            kategoriId = ((Kategori) cmbkategori.getSelectedItem()).getId();
+        } else {
+            kategoriId = this.kategoriId; 
+        }
+
+        int hargaToInt;
+        try {
+            hargaToInt = Integer.parseInt(hargaText);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Harga harus berupa angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ProductController controller = new ProductController();
+        boolean sukses = controller.delete(this.id);
+
+        if (!sukses){
+            JOptionPane.showMessageDialog(this, "Gagal menghapus Produk.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this, "Produk berhasil di hapus.");
+        loadTableProduk();
+        tfnamaproduk.setText(""); 
+        tfharga.setText("");
+    }//GEN-LAST:event_btnhapusActionPerformed
+    
     private void loadKategoriToComboBox() {
         cmbkategori.removeAllItems(); 
         KategoriController controller = new KategoriController();
@@ -489,9 +621,9 @@ public class ProductView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton setText;
     private javax.swing.JTable tableproduk;
     private javax.swing.JTextField tfharga;
     private javax.swing.JTextField tfnamaproduk;
-    private javax.swing.JTextField tfsimpanproduk;
     // End of variables declaration//GEN-END:variables
 }

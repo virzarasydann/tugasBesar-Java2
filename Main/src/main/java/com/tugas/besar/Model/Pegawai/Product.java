@@ -29,6 +29,10 @@ public class Product {
         this.kategoriId = kategoriId;
     }
     
+    @Override
+    public String toString() {
+        return nama; // JTable akan tampilkan nama produk
+    }
     
 
     public int getId() {

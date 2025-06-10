@@ -5,7 +5,9 @@
 package com.tugas.besar.View.Pegawai;
 
 import com.tugas.besar.Controller.Pegawai.KategoriController;
+import com.tugas.besar.Controller.Pegawai.ProductController;
 import com.tugas.besar.Model.Pegawai.Kategori;
+import com.tugas.besar.Model.Pegawai.Product;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,6 +19,7 @@ import com.tugas.besar.View.Pegawai.KategoriView;
 import com.tugas.besar.View.Pegawai.TransaksiView;
 import com.tugas.besar.View.Pegawai.RiwayatView;
 import com.tugas.besar.View.Pegawai.OperasionalView;
+import javax.swing.table.TableModel;
 
 
 /**
@@ -24,7 +27,7 @@ import com.tugas.besar.View.Pegawai.OperasionalView;
  * @author silvi
  */
 public class KategoriView extends javax.swing.JFrame {
-    
+    private int id;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(KategoriView.class.getName());
 
     /**
@@ -55,7 +58,6 @@ public class KategoriView extends javax.swing.JFrame {
         btntambahkategori = new javax.swing.JButton();
         tfnamakategori = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfsimpankategori = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablekategori = new javax.swing.JTable();
         btnedit = new javax.swing.JButton();
@@ -66,6 +68,7 @@ public class KategoriView extends javax.swing.JFrame {
         btnmenuproduk = new javax.swing.JButton();
         btnmenutransaksi = new javax.swing.JButton();
         btnmenuoperasional = new javax.swing.JButton();
+        setText = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,16 +101,6 @@ public class KategoriView extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel3.setText("Nama Kategori");
-
-        tfsimpankategori.setBackground(new java.awt.Color(102, 102, 255));
-        tfsimpankategori.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
-        tfsimpankategori.setForeground(new java.awt.Color(255, 255, 255));
-        tfsimpankategori.setText("Simpan Kategori");
-        tfsimpankategori.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfsimpankategoriActionPerformed(evt);
-            }
-        });
 
         tablekategori.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,6 +215,13 @@ public class KategoriView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        setText.setText("Set Text");
+        setText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setTextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -242,21 +242,21 @@ public class KategoriView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfsimpankategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnhapus))))
+                        .addComponent(btnhapus)))
                 .addGap(0, 395, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(tfnamakategori, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(setText)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(56, 56, 56)
+                            .addComponent(tfnamakategori, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(33, 33, 33)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(15, 15, 15)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(464, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -281,8 +281,8 @@ public class KategoriView extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(21, 21, 21)))
                 .addComponent(tfnamakategori, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(tfsimpankategori, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(setText)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(237, 237, 237))
@@ -319,8 +319,8 @@ public class KategoriView extends javax.swing.JFrame {
 
         if (sukses) {
             JOptionPane.showMessageDialog(this, "Kategori berhasil disimpan.");
-            tfnamakategori.setText(""); // Kosongkan field
-            loadKategoriTable(); // Refresh isi tabel
+            tfnamakategori.setText(""); 
+            loadKategoriTable(); 
         } else {
             JOptionPane.showMessageDialog(this, "Gagal menyimpan kategori.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -330,60 +330,76 @@ public class KategoriView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfnamakategoriActionPerformed
 
-    private void tfsimpankategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfsimpankategoriActionPerformed
-        
-    }//GEN-LAST:event_tfsimpankategoriActionPerformed
-
     
     
     private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = tablekategori.getSelectedRow();
+        String namaKategori = tfnamakategori.getText().trim();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris data yang ingin di update terlebih dahulu.");
+            return;
+        }
+       
+
+        if (namaKategori.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama kategori tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+       
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin Update data menjadi \"" + namaKategori + "\"?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                KategoriController controller = new KategoriController();
+                boolean sukses = controller.update(this.id, namaKategori);
+
+                if (!sukses){
+                    JOptionPane.showMessageDialog(this, "Gagal mengupdate Kategori", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(this, "Kategori berhasil di update.");
+                loadKategoriTable();
+                tfnamakategori.setText(""); 
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menghapus data: " + e.getMessage());
+            }
+        }
+     
+      
+
+        
+       
     }//GEN-LAST:event_btneditActionPerformed
 
     private void btnhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapusActionPerformed
-       int selectedRow = tablekategori.getSelectedRow();
-
-    if (selectedRow == -1) {
-        JOptionPane.showMessageDialog(this, "Pilih baris data yang ingin dihapus terlebih dahulu.");
-        return;
-    }
-
-    String nama = tablekategori.getValueAt(selectedRow, 0).toString();
-
-    int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus data \"" + nama + "\"?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
-    if (confirm == JOptionPane.YES_OPTION) {
-        try {
-            // Koneksi ke database
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mugi_berkah", "root", "");
-
-            // Ambil ID dari tabel
-            int id = Integer.parseInt(tablekategori.getValueAt(selectedRow, 0).toString());
-
-            // Query DELETE
-            String sql = "DELETE FROM produk WHERE id=?";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
-
-            // Inilah bagian yang sebelumnya hilang
-            int affected = stmt.executeUpdate();
-
-            if (affected > 0) {
-                // Jika berhasil dihapus dari DB, baru hapus dari GUI
-                DefaultTableModel model = (DefaultTableModel) tablekategori.getModel();
-                model.removeRow(selectedRow);
-
-                JOptionPane.showMessageDialog(this, "Data berhasil dihapus.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Data gagal dihapus dari database.");
-            }
-
-            stmt.close();
-            conn.close();
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menghapus data: " + e.getMessage());
+        int selectedRow = tablekategori.getSelectedRow();
+        String namaKategori = tfnamakategori.getText().trim();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris data yang ingin dihapus terlebih dahulu.");
+            return;
         }
-    }
+        
+   
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus data \"" + namaKategori + "\"?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                KategoriController controller = new KategoriController();
+                boolean sukses = controller.delete(this.id);
+                if (!sukses){
+                    JOptionPane.showMessageDialog(this, "Gagal menghapus kategori", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(this, "Kategori berhasil disimpan.");
+                loadKategoriTable();
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menghapus data: " + e.getMessage());
+            }
+        }
     }//GEN-LAST:event_btnhapusActionPerformed
 
     private void btnmenutransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenutransaksiActionPerformed
@@ -420,6 +436,24 @@ public class KategoriView extends javax.swing.JFrame {
     operasionalFrame.setLocationRelativeTo(null);
     this.dispose();
     }//GEN-LAST:event_btnmenuoperasionalActionPerformed
+
+    private void setTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setTextActionPerformed
+        TableModel model = tablekategori.getModel();
+        int[] selectedRows = tablekategori.getSelectedRows();
+
+        if (selectedRows.length > 0) {
+            int row = selectedRows[0];
+
+            Kategori kategori = (Kategori) model.getValueAt(row, 1);
+            
+
+            tfnamakategori.setText(kategori.getNama());
+            
+            this.id = kategori.getId();
+
+            
+        }
+    }//GEN-LAST:event_setTextActionPerformed
     private void loadKategoriTable() {
         KategoriController controller = new KategoriController();
         List<Kategori> daftarKategori = controller.read();
@@ -432,7 +466,7 @@ public class KategoriView extends javax.swing.JFrame {
         for (Kategori kategori : daftarKategori) {
             model.addRow(new Object[]{
                 no++,
-                kategori.getNama(),
+                kategori,
               
             });
         }
@@ -481,8 +515,8 @@ public class KategoriView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton setText;
     private javax.swing.JTable tablekategori;
     private javax.swing.JTextField tfnamakategori;
-    private javax.swing.JTextField tfsimpankategori;
     // End of variables declaration//GEN-END:variables
 }

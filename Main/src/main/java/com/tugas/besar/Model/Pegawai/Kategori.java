@@ -5,6 +5,7 @@
 package com.tugas.besar.Model.Pegawai;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 /**
  *
@@ -41,6 +42,20 @@ public class Kategori {
     public String toString() {
         return nama; // Ini akan ditampilkan di JComboBox
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Kategori)) return false;
+        Kategori other = (Kategori) o;
+        return id == other.id; 
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+    
+    
     public int getId() {
         return id;
     }

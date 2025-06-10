@@ -14,6 +14,7 @@ public class ProductDAO {
 
     public ProductDAO() {
         this.connection = DatabaseConnection.getConnection();
+        
     }
 
     
@@ -29,6 +30,7 @@ public class ProductDAO {
 
                 int rowsInserted = stmt.executeUpdate();
                 return rowsInserted > 0;
+                
             } catch (SQLException e) {
                 System.err.println("Insert product failed: " + e.getMessage());
                 return false;
