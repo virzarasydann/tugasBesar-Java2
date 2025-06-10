@@ -19,6 +19,7 @@ import com.tugas.besar.View.Pegawai.KategoriView;
 import com.tugas.besar.View.Pegawai.TransaksiView;
 import com.tugas.besar.View.Pegawai.RiwayatView;
 import com.tugas.besar.View.Pegawai.OperasionalView;
+import javax.swing.JFrame;
 import javax.swing.table.TableModel;
 
 
@@ -37,9 +38,10 @@ public class KategoriView extends javax.swing.JFrame {
         initComponents();
         loadKategoriTable();
         setTitle("Halaman Kategori");
-        setSize(600, 400);
+//        setSize(600, 400);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
     /**

@@ -21,6 +21,7 @@ import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -39,6 +40,7 @@ public class ProductView extends javax.swing.JFrame {
      */
     public ProductView() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         loadKategoriToComboBox();
         loadTableProduk();
        

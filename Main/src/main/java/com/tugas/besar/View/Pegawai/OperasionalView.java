@@ -3,11 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.tugas.besar.View.Pegawai;
+
+
+import com.tugas.besar.Controller.Pegawai.OperasionalController;
+import com.tugas.besar.DataAccesObject.Pegawai.OperasionalDAO;
+import com.tugas.besar.Model.Pegawai.Operasional;
 import com.tugas.besar.View.Pegawai.ProductView;
 import com.tugas.besar.View.Pegawai.KategoriView;
 import com.tugas.besar.View.Pegawai.TransaksiView;
 import com.tugas.besar.View.Pegawai.RiwayatView;
 import com.tugas.besar.View.Pegawai.OperasionalView;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 
 /**
@@ -15,7 +25,7 @@ import com.tugas.besar.View.Pegawai.OperasionalView;
  * @author silvi
  */
 public class OperasionalView extends javax.swing.JFrame {
-    
+    private int id;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(OperasionalView.class.getName());
 
     /**
@@ -23,6 +33,8 @@ public class OperasionalView extends javax.swing.JFrame {
      */
     public OperasionalView() {
         initComponents();
+        loadTableOperasional();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -40,13 +52,12 @@ public class OperasionalView extends javax.swing.JFrame {
         jLabel54 = new javax.swing.JLabel();
         btntambahoperasional13 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tableoperasional13 = new javax.swing.JTable();
-        tfnamaoperasional13 = new javax.swing.JTextField();
+        tableoperasional = new javax.swing.JTable();
+        tfnamaoperasional = new javax.swing.JTextField();
         jLabel55 = new javax.swing.JLabel();
         jLabel56 = new javax.swing.JLabel();
-        tfharga13 = new javax.swing.JTextField();
-        tfsimpanoperasional13 = new javax.swing.JTextField();
-        btnedit13 = new javax.swing.JButton();
+        tfharga = new javax.swing.JTextField();
+        btnedit = new javax.swing.JButton();
         btnhapus13 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnmenukategori = new javax.swing.JButton();
@@ -54,6 +65,7 @@ public class OperasionalView extends javax.swing.JFrame {
         btnmenuproduk = new javax.swing.JButton();
         btnmenutransaksi = new javax.swing.JButton();
         btnmenuoperasional = new javax.swing.JButton();
+        setText = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,29 +79,26 @@ public class OperasionalView extends javax.swing.JFrame {
         btntambahoperasional13.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         btntambahoperasional13.setForeground(new java.awt.Color(255, 255, 255));
         btntambahoperasional13.setText("Tambah Operasional");
-
-        tableoperasional13.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Nama Barang", "Harga"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        btntambahoperasional13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntambahoperasional13ActionPerformed(evt);
             }
         });
-        jScrollPane2.setViewportView(tableoperasional13);
 
-        tfnamaoperasional13.setFont(new java.awt.Font("Sans Serif Collection", 0, 12)); // NOI18N
-        tfnamaoperasional13.setText("Masukkan Nama Barang");
+        tableoperasional.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(tableoperasional);
+
+        tfnamaoperasional.setFont(new java.awt.Font("Sans Serif Collection", 0, 12)); // NOI18N
+        tfnamaoperasional.setText("Masukkan Nama Barang");
 
         jLabel55.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel55.setText("Nama Barang");
@@ -97,22 +106,27 @@ public class OperasionalView extends javax.swing.JFrame {
         jLabel56.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel56.setText("Harga");
 
-        tfharga13.setText("Masukkan Harga");
+        tfharga.setText("Masukkan Harga");
 
-        tfsimpanoperasional13.setBackground(new java.awt.Color(102, 102, 255));
-        tfsimpanoperasional13.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
-        tfsimpanoperasional13.setForeground(new java.awt.Color(255, 255, 255));
-        tfsimpanoperasional13.setText("Simpan Operasional");
-
-        btnedit13.setBackground(new java.awt.Color(255, 204, 102));
-        btnedit13.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
-        btnedit13.setForeground(new java.awt.Color(255, 255, 255));
-        btnedit13.setText("Edit Operasional");
+        btnedit.setBackground(new java.awt.Color(255, 204, 102));
+        btnedit.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
+        btnedit.setForeground(new java.awt.Color(255, 255, 255));
+        btnedit.setText("Edit Operasional");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
 
         btnhapus13.setBackground(new java.awt.Color(255, 102, 102));
         btnhapus13.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         btnhapus13.setForeground(new java.awt.Color(255, 255, 255));
         btnhapus13.setText("Hapus Operasional");
+        btnhapus13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhapus13ActionPerformed(evt);
+            }
+        });
 
         btnmenukategori.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         btnmenukategori.setText("Kategori");
@@ -187,6 +201,13 @@ public class OperasionalView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        setText.setText("Set Text");
+        setText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setTextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -200,35 +221,34 @@ public class OperasionalView extends javax.swing.JFrame {
                         .addGap(69, 69, 69)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel55)
-                            .addGroup(jPanel15Layout.createSequentialGroup()
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel15Layout.createSequentialGroup()
-                                            .addGap(12, 12, 12)
-                                            .addComponent(tfharga13, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jLabel56))
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel15Layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
-                                        .addComponent(tfnamaoperasional13, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(285, 285, 285)
-                                .addComponent(tfsimpanoperasional13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(tfharga, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel56))
+                                .addGroup(jPanel15Layout.createSequentialGroup()
+                                    .addGap(12, 12, 12)
+                                    .addComponent(tfnamaoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 80, Short.MAX_VALUE))
+                .addGap(0, 112, Short.MAX_VALUE))
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel15Layout.createSequentialGroup()
-                        .addGap(266, 266, 266)
-                        .addComponent(btntambahoperasional13)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnedit13)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnhapus13))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(294, 294, 294)
                         .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addComponent(btntambahoperasional13)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnedit)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(setText)
+                            .addComponent(btnhapus13))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel15Layout.setVerticalGroup(
@@ -243,23 +263,20 @@ public class OperasionalView extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnedit13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addComponent(btnhapus13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(btntambahoperasional13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(67, 67, 67)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addComponent(tfsimpanoperasional13, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                        .addComponent(jLabel55)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfnamaoperasional13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfharga13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)))
+                .addComponent(jLabel55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfnamaoperasional, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfharga, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(setText))
+                .addGap(56, 56, 56)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71))
         );
@@ -319,6 +336,176 @@ public class OperasionalView extends javax.swing.JFrame {
     this.dispose();
     }//GEN-LAST:event_btnmenuoperasionalActionPerformed
 
+    private void btntambahoperasional13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntambahoperasional13ActionPerformed
+        String namaOperasional = tfnamaoperasional.getText().trim();
+        String hargaOperasional = tfharga.getText().trim();
+        
+        if (namaOperasional.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama Operasional tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
+        if (hargaOperasional.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Harga Operasional tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int hargaToInt;
+        try {
+            hargaToInt = Integer.parseInt(hargaOperasional);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Harga harus berupa angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+      
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin melanjutkan? \"" +  "\"?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                 OperasionalController controller = new OperasionalController();
+                  boolean sukses = controller.create(namaOperasional, hargaToInt);
+
+                if (!sukses){
+                    JOptionPane.showMessageDialog(this, "Gagal menambahkan Operasional", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(this, "Operasional berhasil di tambahkan.");
+                tfnamaoperasional.setText(""); 
+                tfharga.setText("");
+                loadTableOperasional(); 
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menghapus data: " + e.getMessage());
+            }
+        }
+       
+    }//GEN-LAST:event_btntambahoperasional13ActionPerformed
+
+    
+    private void setTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setTextActionPerformed
+        TableModel model = tableoperasional.getModel();
+        int[] selectedRows = tableoperasional.getSelectedRows();
+
+        if (selectedRows.length > 0) {
+            int row = selectedRows[0];
+
+            Operasional nama = (Operasional) model.getValueAt(row, 1);
+            String harga = model.getValueAt(row, 2).toString();
+            
+
+            tfnamaoperasional.setText(nama.getNama());
+            tfharga.setText(harga);
+            
+            this.id = nama.getId();
+
+            
+        }
+    }//GEN-LAST:event_setTextActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        String namaOperasional = tfnamaoperasional.getText().trim();
+        String hargaOperasional = tfharga.getText().trim();
+        
+        if (namaOperasional.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama Operasional tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
+        if (hargaOperasional.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Harga Operasional tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int hargaToInt;
+        try {
+            hargaToInt = Integer.parseInt(hargaOperasional);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Harga harus berupa angka.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+      
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin mengubah data? \"" + "\"?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                 OperasionalController controller = new OperasionalController();
+                  boolean sukses = controller.update(this.id,namaOperasional, hargaToInt);
+
+                if (!sukses){
+                    JOptionPane.showMessageDialog(this, "Gagal mengupdate Operasional", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(this, "Operasional berhasil di update.");
+                tfnamaoperasional.setText(""); 
+                tfharga.setText("");
+                loadTableOperasional(); 
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menghapus data: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btneditActionPerformed
+
+    private void btnhapus13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapus13ActionPerformed
+        
+
+        int confirm = JOptionPane.showConfirmDialog(this, "Yakin ingin menghapus? \"" +  "\"?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                 OperasionalController controller = new OperasionalController();
+                  boolean sukses = controller.delete(this.id);
+
+                if (!sukses){
+                    JOptionPane.showMessageDialog(this, "Gagal menghapus Operasional", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(this, "Operasional berhasil di hapus.");
+                tfnamaoperasional.setText(""); 
+                tfharga.setText("");
+                loadTableOperasional(); 
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat menghapus data: " + e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_btnhapus13ActionPerformed
+    
+    private void loadTableOperasional() {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableoperasional.setModel(tableModel);
+
+        
+        tableModel.addColumn("No");
+        tableModel.addColumn("Nama");
+        tableModel.addColumn("Harga");
+        
+       
+        tableModel.setRowCount(0);
+
+        OperasionalController controller = new OperasionalController();
+        
+        
+        List<Operasional> daftarOperasional = controller.read();
+        int no = 1;
+        for (Operasional operasional : daftarOperasional) {
+            Object[] baris = {
+//                produk.getId(),
+                no++,
+                operasional,
+                operasional.getHarga(),
+                
+                
+            };
+            tableModel.addRow(baris);
+        }
+          tableoperasional.setFillsViewportHeight(true);      
+          
+    }
     /**
      * @param args the command line arguments
      */
@@ -346,206 +533,24 @@ public class OperasionalView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnedit;
-    private javax.swing.JButton btnedit1;
-    private javax.swing.JButton btnedit10;
-    private javax.swing.JButton btnedit11;
-    private javax.swing.JButton btnedit12;
-    private javax.swing.JButton btnedit13;
-    private javax.swing.JButton btnedit2;
-    private javax.swing.JButton btnedit3;
-    private javax.swing.JButton btnedit4;
-    private javax.swing.JButton btnedit5;
-    private javax.swing.JButton btnedit6;
-    private javax.swing.JButton btnedit7;
-    private javax.swing.JButton btnedit8;
-    private javax.swing.JButton btnedit9;
-    private javax.swing.JButton btnhapus;
-    private javax.swing.JButton btnhapus1;
-    private javax.swing.JButton btnhapus10;
-    private javax.swing.JButton btnhapus11;
-    private javax.swing.JButton btnhapus12;
     private javax.swing.JButton btnhapus13;
-    private javax.swing.JButton btnhapus2;
-    private javax.swing.JButton btnhapus3;
-    private javax.swing.JButton btnhapus4;
-    private javax.swing.JButton btnhapus5;
-    private javax.swing.JButton btnhapus6;
-    private javax.swing.JButton btnhapus7;
-    private javax.swing.JButton btnhapus8;
-    private javax.swing.JButton btnhapus9;
     private javax.swing.JButton btnmenukategori;
     private javax.swing.JButton btnmenuoperasional;
     private javax.swing.JButton btnmenuproduk;
     private javax.swing.JButton btnmenuriwayat;
     private javax.swing.JButton btnmenutransaksi;
-    private javax.swing.JButton btntambahoperasional;
-    private javax.swing.JButton btntambahoperasional1;
-    private javax.swing.JButton btntambahoperasional10;
-    private javax.swing.JButton btntambahoperasional11;
-    private javax.swing.JButton btntambahoperasional12;
     private javax.swing.JButton btntambahoperasional13;
-    private javax.swing.JButton btntambahoperasional2;
-    private javax.swing.JButton btntambahoperasional3;
-    private javax.swing.JButton btntambahoperasional4;
-    private javax.swing.JButton btntambahoperasional5;
-    private javax.swing.JButton btntambahoperasional6;
-    private javax.swing.JButton btntambahoperasional7;
-    private javax.swing.JButton btntambahoperasional8;
-    private javax.swing.JButton btntambahoperasional9;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel51;
-    private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
-    private javax.swing.JScrollPane jScrollPane12;
-    private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane14;
-    private javax.swing.JScrollPane jScrollPane15;
-    private javax.swing.JScrollPane jScrollPane16;
-    private javax.swing.JScrollPane jScrollPane17;
-    private javax.swing.JScrollPane jScrollPane18;
-    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane20;
-    private javax.swing.JScrollPane jScrollPane21;
-    private javax.swing.JScrollPane jScrollPane22;
-    private javax.swing.JScrollPane jScrollPane23;
-    private javax.swing.JScrollPane jScrollPane24;
-    private javax.swing.JScrollPane jScrollPane25;
-    private javax.swing.JScrollPane jScrollPane26;
-    private javax.swing.JScrollPane jScrollPane27;
     private javax.swing.JScrollPane jScrollPane28;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JButton setText;
     private javax.swing.JTable tableoperasional;
-    private javax.swing.JTable tableoperasional1;
-    private javax.swing.JTable tableoperasional10;
-    private javax.swing.JTable tableoperasional11;
-    private javax.swing.JTable tableoperasional12;
-    private javax.swing.JTable tableoperasional13;
-    private javax.swing.JTable tableoperasional2;
-    private javax.swing.JTable tableoperasional3;
-    private javax.swing.JTable tableoperasional4;
-    private javax.swing.JTable tableoperasional5;
-    private javax.swing.JTable tableoperasional6;
-    private javax.swing.JTable tableoperasional7;
-    private javax.swing.JTable tableoperasional8;
-    private javax.swing.JTable tableoperasional9;
     private javax.swing.JTextField tfharga;
-    private javax.swing.JTextField tfharga1;
-    private javax.swing.JTextField tfharga10;
-    private javax.swing.JTextField tfharga11;
-    private javax.swing.JTextField tfharga12;
-    private javax.swing.JTextField tfharga13;
-    private javax.swing.JTextField tfharga2;
-    private javax.swing.JTextField tfharga3;
-    private javax.swing.JTextField tfharga4;
-    private javax.swing.JTextField tfharga5;
-    private javax.swing.JTextField tfharga6;
-    private javax.swing.JTextField tfharga7;
-    private javax.swing.JTextField tfharga8;
-    private javax.swing.JTextField tfharga9;
     private javax.swing.JTextField tfnamaoperasional;
-    private javax.swing.JTextField tfnamaoperasional1;
-    private javax.swing.JTextField tfnamaoperasional10;
-    private javax.swing.JTextField tfnamaoperasional11;
-    private javax.swing.JTextField tfnamaoperasional12;
-    private javax.swing.JTextField tfnamaoperasional13;
-    private javax.swing.JTextField tfnamaoperasional2;
-    private javax.swing.JTextField tfnamaoperasional3;
-    private javax.swing.JTextField tfnamaoperasional4;
-    private javax.swing.JTextField tfnamaoperasional5;
-    private javax.swing.JTextField tfnamaoperasional6;
-    private javax.swing.JTextField tfnamaoperasional7;
-    private javax.swing.JTextField tfnamaoperasional8;
-    private javax.swing.JTextField tfnamaoperasional9;
-    private javax.swing.JTextField tfsimpanoperasional;
-    private javax.swing.JTextField tfsimpanoperasional1;
-    private javax.swing.JTextField tfsimpanoperasional10;
-    private javax.swing.JTextField tfsimpanoperasional11;
-    private javax.swing.JTextField tfsimpanoperasional12;
-    private javax.swing.JTextField tfsimpanoperasional13;
-    private javax.swing.JTextField tfsimpanoperasional2;
-    private javax.swing.JTextField tfsimpanoperasional3;
-    private javax.swing.JTextField tfsimpanoperasional4;
-    private javax.swing.JTextField tfsimpanoperasional5;
-    private javax.swing.JTextField tfsimpanoperasional6;
-    private javax.swing.JTextField tfsimpanoperasional7;
-    private javax.swing.JTextField tfsimpanoperasional8;
-    private javax.swing.JTextField tfsimpanoperasional9;
     // End of variables declaration//GEN-END:variables
 }
