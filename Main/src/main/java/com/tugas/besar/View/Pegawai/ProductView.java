@@ -410,16 +410,13 @@ public class ProductView extends javax.swing.JFrame {
           
     }
     private void tfnamaprodukActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfnamaprodukActionPerformed
-    TransaksiView transaksiFrame = new TransaksiView();
-    transaksiFrame.setVisible(true);
-    transaksiFrame.setLocationRelativeTo(null);
-    this.dispose();
+    
     }//GEN-LAST:event_tfnamaprodukActionPerformed
 
     private void btnmenutransaksi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenutransaksi2ActionPerformed
-    ProductView productFrame = new ProductView();
-    productFrame.setVisible(true);
-    productFrame.setLocationRelativeTo(null);
+    TransaksiView transaksiFrame = new TransaksiView();
+    transaksiFrame.setVisible(true);
+    transaksiFrame.setLocationRelativeTo(null);
     this.dispose();
     }//GEN-LAST:event_btnmenutransaksi2ActionPerformed
 
