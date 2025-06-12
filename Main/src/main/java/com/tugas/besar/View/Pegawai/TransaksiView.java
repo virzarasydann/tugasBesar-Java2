@@ -5,10 +5,12 @@
 package com.tugas.besar.View.Pegawai;
 import com.tugas.besar.Controller.Pegawai.ProductController;
 import com.tugas.besar.Controller.Pegawai.TransaksiController;
+import com.tugas.besar.Controller.Pegawai.TransaksiDetailController;
 import com.tugas.besar.DataAccesObject.Pegawai.ProductDAO;
 import com.tugas.besar.Model.Pegawai.Kategori;
 import com.tugas.besar.Model.Pegawai.Keranjang;
 import com.tugas.besar.Model.Pegawai.Product;
+import com.tugas.besar.Model.Pegawai.TransaksiDetail;
 import com.tugas.besar.View.Pegawai.ProductView;
 import com.tugas.besar.View.Pegawai.KategoriView;
 import com.tugas.besar.View.Pegawai.TransaksiView;
@@ -21,6 +23,8 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -40,6 +44,7 @@ public class TransaksiView extends javax.swing.JFrame {
      */
     public TransaksiView() {
         initComponents();
+        setupListeners();
         labelUangDiterima.setVisible(false);
         tfUangDiterima.setVisible(false);
         labelKembalian.setVisible(false);
@@ -48,6 +53,42 @@ public class TransaksiView extends javax.swing.JFrame {
 //        setExtendedState(JFrame.MAXIMIZED_BOTH);
         loadTableMenu();
     }
+    
+    private void setupListeners() {
+        tfUangDiterima.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                hitungKembalian();
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                hitungKembalian();
+            }
+
+            public void changedUpdate(DocumentEvent e) {
+                hitungKembalian();
+            }
+
+            private void hitungKembalian() {
+                if (!tfUangDiterima.getText().isEmpty()){
+                    try {
+                        
+                        int bayar = Integer.parseInt(tfUangDiterima.getText());
+                        if (bayar >= totalHarga) {
+                            int kembalian = bayar - totalHarga;
+                            tfKembalian.setText(String.valueOf(kembalian));
+                        } else {
+                            tfKembalian.setText("Uang kurang");
+                        }
+                    } catch (NumberFormatException e) {
+                        tfKembalian.setText("Angka salah");
+                    }
+                } else {
+                    tfKembalian.setText("");
+                }
+            }
+        });
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -185,11 +226,6 @@ public class TransaksiView extends javax.swing.JFrame {
         labelUangDiterima.setText("Jumlah Uang Diterima");
 
         tfUangDiterima.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
-        tfUangDiterima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfUangDiterimaActionPerformed(evt);
-            }
-        });
 
         labelKembalian.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         labelKembalian.setText("Kembalian");
@@ -738,6 +774,11 @@ public class TransaksiView extends javax.swing.JFrame {
                 
 
                 JOptionPane.showMessageDialog(this, "Transaksi berhasil");
+                for (Keranjang k : keranjangDisplay) {
+                    
+                    TransaksiDetailController controllerDetail = new TransaksiDetailController();
+                    controllerDetail.create(idTransaksi, k.getNamaMakanan(), k.getJumlahPesanan(), k.getHargaMakanan());
+                }
                 
                 keranjangDisplay.clear();                       
                 btnPesanToTable(keranjangDisplay); 
@@ -758,10 +799,6 @@ public class TransaksiView extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnProsesPembayaranActionPerformed
-
-    private void tfUangDiterimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfUangDiterimaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfUangDiterimaActionPerformed
 
     private void tfjumlahPesananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfjumlahPesananActionPerformed
         // TODO add your handling code here:

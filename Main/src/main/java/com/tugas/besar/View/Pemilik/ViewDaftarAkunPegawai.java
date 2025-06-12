@@ -3,14 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.tugas.besar.View.Pemilik;
+import com.tugas.besar.Controller.AuthController;
+import com.tugas.besar.Model.User;
 import com.tugas.besar.View.Pemilik.ViewDaftarAkunPegawai;
 import com.tugas.besar.View.Pemilik.ViewLaporanPenjualan;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
  * @author silvi
  */
 public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
-    
+    private List<User> daftarPegawai;
+    private int id;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ViewDaftarAkunPegawai.class.getName());
 
     /**
@@ -18,6 +25,7 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
      */
     public ViewDaftarAkunPegawai() {
         initComponents();
+        loadPegawaiTable();
     }
 
     /**
@@ -37,16 +45,17 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
         btnmenutambahakun = new javax.swing.JButton();
         btnmenulaporanpenjualan = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
-        tfuusername = new javax.swing.JTextField();
+        tfUsername = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        pfpassword = new javax.swing.JPasswordField();
-        btntambahakun = new javax.swing.JButton();
+        pfPassword = new javax.swing.JPasswordField();
+        btnTambahAkun = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         btnedit = new javax.swing.JButton();
         btnhapus = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePegawai = new javax.swing.JTable();
+        tfSetText = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,15 +104,20 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel14.setText("Username");
 
-        tfuusername.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        tfUsername.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
         jLabel15.setText("Password");
 
-        pfpassword.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
+        pfPassword.setFont(new java.awt.Font("Sans Serif Collection", 0, 14)); // NOI18N
 
-        btntambahakun.setFont(new java.awt.Font("Sans Serif Collection", 1, 12)); // NOI18N
-        btntambahakun.setText("Tambah Akun");
+        btnTambahAkun.setFont(new java.awt.Font("Sans Serif Collection", 1, 12)); // NOI18N
+        btnTambahAkun.setText("Tambah Akun");
+        btnTambahAkun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahAkunActionPerformed(evt);
+            }
+        });
 
         jPanel7.setBackground(new java.awt.Color(153, 153, 153));
 
@@ -123,11 +137,16 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
 
         btnedit.setFont(new java.awt.Font("Sans Serif Collection", 1, 12)); // NOI18N
         btnedit.setText("Edit Akun");
+        btnedit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditActionPerformed(evt);
+            }
+        });
 
         btnhapus.setFont(new java.awt.Font("Sans Serif Collection", 1, 12)); // NOI18N
         btnhapus.setText("Hapus Akun");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePegawai.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -145,7 +164,14 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tablePegawai);
+
+        tfSetText.setText("Set Text");
+        tfSetText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSetTextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -169,15 +195,13 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
                             .addComponent(jLabel14)
                             .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel5Layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(pfpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
                                     .addGap(14, 14, 14)
-                                    .addComponent(tfuusername, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(278, 278, 278)
-                        .addComponent(btntambahakun))
+                        .addComponent(btnTambahAkun))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(292, 292, 292)
                         .addComponent(jLabel16)))
@@ -185,6 +209,7 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 86, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfSetText)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,13 +229,13 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
                 .addGap(52, 52, 52)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfuusername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pfpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(btntambahakun, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTambahAkun, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -219,7 +244,9 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnedit, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnhapus, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(12, 12, 12)
+                .addComponent(tfSetText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(153, Short.MAX_VALUE))
         );
@@ -256,6 +283,111 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
     this.dispose();
     }//GEN-LAST:event_btnmenulaporanpenjualanActionPerformed
 
+    private void btnTambahAkunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahAkunActionPerformed
+        String namaPegawai = tfUsername.getText().trim();
+        String password = pfPassword.getText().trim();
+
+        if (namaPegawai.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama Username tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        AuthController controller = new AuthController();
+        boolean sukses = controller.registerPegawai(namaPegawai,password);
+
+        if (sukses) {
+            JOptionPane.showMessageDialog(this, "Username berhasil disimpan.");
+            tfUsername.setText(""); 
+            pfPassword.setText(""); 
+            loadPegawaiTable(); 
+        } else {
+            JOptionPane.showMessageDialog(this, "Gagal menyimpan.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnTambahAkunActionPerformed
+
+    private void btneditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditActionPerformed
+        int selectedRow = tablePegawai.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris data yang ingin diupdate terlebih dahulu.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String username = tfUsername.getText().trim();
+        String password = new String(pfPassword.getPassword());
+
+        if (username.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Password tidak boleh kosong.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int confirm = JOptionPane.showConfirmDialog(this, 
+            "Yakin ingin mengupdate data dengan username \"" + username + "\"?", 
+            "Konfirmasi Update", JOptionPane.YES_NO_OPTION);
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                AuthController authController = new AuthController();
+                boolean sukses = authController.editPegawai(this.id, username, password);
+
+                if (!sukses) {
+                    JOptionPane.showMessageDialog(this, "Gagal mengupdate data pegawai.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                JOptionPane.showMessageDialog(this, "Data pegawai berhasil diupdate.");
+                tfUsername.setText("");
+                pfPassword.setText("");
+                loadPegawaiTable(); // Refresh tabel
+
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Terjadi kesalahan saat mengupdate data: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btneditActionPerformed
+    
+    private void tfSetTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSetTextActionPerformed
+        int selectedRow = tablePegawai.getSelectedRow();
+
+        if (selectedRow != -1 && selectedRow < daftarPegawai.size()) {
+            // Ambil User dari list berdasarkan baris yang dipilih
+            User selectedUser = daftarPegawai.get(selectedRow);
+
+            this.id = selectedUser.getId(); // ambil id dari object User
+            tfUsername.setText(selectedUser.getUsername());
+            pfPassword.setText(""); // kosongkan password untuk keamanan
+        } else {
+            JOptionPane.showMessageDialog(this, "Silakan pilih satu baris dari tabel.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_tfSetTextActionPerformed
+    
+    private void loadPegawaiTable() {
+        AuthController controller = new AuthController();
+        daftarPegawai = controller.getAllPegawai();
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No");
+        model.addColumn("Nama");
+        model.addColumn("Password");
+        
+        int no = 1;
+        for (User user : daftarPegawai) {
+            model.addRow(new Object[]{
+                no++,
+                user,
+                user.getPassword()
+                
+              
+            });
+        }
+
+        tablePegawai.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
@@ -282,43 +414,24 @@ public class ViewDaftarAkunPegawai extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTambahAkun;
     private javax.swing.JButton btnedit;
     private javax.swing.JButton btnhapus;
     private javax.swing.JButton btnmenulaporanpenjualan;
     private javax.swing.JButton btnmenutambahakun;
-    private javax.swing.JButton btntambahakun;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JPasswordField pfpassword;
-    private javax.swing.JTextField tfusername;
-    private javax.swing.JTextField tfusername1;
-    private javax.swing.JTextField tfusername2;
-    private javax.swing.JTextField tfusername3;
-    private javax.swing.JTextField tfuusername;
+    private javax.swing.JPasswordField pfPassword;
+    private javax.swing.JTable tablePegawai;
+    private javax.swing.JButton tfSetText;
+    private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 }

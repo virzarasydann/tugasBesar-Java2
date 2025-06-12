@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.List;
 
 /**
  *
@@ -31,5 +32,27 @@ public class AuthController {
         } else {
             return null; 
         }
+    }
+    
+    public boolean registerPegawai(String username, String password) {
+    userDAO userDao = new userDAO();
+    return userDao.tambahPegawai(username, password);
+}
+
+    // UPDATE Pegawai
+    public boolean editPegawai(int id, String username, String password) {
+        userDAO userDao = new userDAO();
+        return userDao.updatePegawai(id, username, password);
+    }
+
+    // DELETE Pegawai
+    public boolean hapusPegawai(int id) {
+        userDAO userDao = new userDAO();
+        return userDao.deletePegawai(id);
+    }
+    
+    public List<User> getAllPegawai() {
+        userDAO userDao = new userDAO();
+        return userDao.getAllPegawai();
     }
 }

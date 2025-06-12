@@ -11,6 +11,7 @@ import  com.tugas.besar.Controller.AuthController;
 import com.tugas.besar.Model.User;
 import com.tugas.besar.View.Pegawai.KategoriView;
 import com.tugas.besar.View.Pegawai.ProductView;
+import com.tugas.besar.View.Pemilik.ViewLaporanPenjualan;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 /**
@@ -163,27 +164,39 @@ public class LoginView extends javax.swing.JFrame {
         AuthController auth = new AuthController();
         User loggedInUser = auth.login(username, password);
 
-        if (loggedInUser != null) {
-            JOptionPane.showMessageDialog(this, "Login berhasil sebagai " + loggedInUser.getRole());
-//            TransaksiView transaksiView = new TransaksiView();
-//            transaksiView.setVisible(true);
-//            transaksiView.setLocationRelativeTo(null); // Agar muncul di tengah layar
-            
-//            KategoriView kategoriView = new KategoriView();
-//            kategoriView.setVisible(true);
-//            kategoriView.setLocationRelativeTo(null); // Agar muncul di tengah layar
-            
-            ProductView productView = new ProductView();
-            productView.setVisible(true);
-            productView.setLocationRelativeTo(null); // Agar muncul di tengah layar
+        if (loggedInUser != null && loggedInUser.getRole() != null) {
+            String role = loggedInUser.getRole().toUpperCase(); 
 
-            // Tutup frame login
-            this.dispose();
+            switch (role) {
+                case "PEGAWAI":
+                    JOptionPane.showMessageDialog(this, "Login berhasil sebagai PEGAWAI");
 
-            
+                    ProductView productView = new ProductView();
+                    productView.setVisible(true);
+                    productView.setLocationRelativeTo(null); 
+
+                    this.dispose(); 
+                    break;
+
+                case "PEMILIK":
+                    JOptionPane.showMessageDialog(this, "Login berhasil sebagai PEMILIK");
+
+                    ViewLaporanPenjualan laporanPenjualanView = new ViewLaporanPenjualan();
+                    laporanPenjualanView.setVisible(true);
+                    laporanPenjualanView.setLocationRelativeTo(null); 
+
+                    this.dispose(); 
+                    break;
+
+                default:
+                    JOptionPane.showMessageDialog(this, "Role tidak dikenali: " + role, "Error", JOptionPane.ERROR_MESSAGE);
+                    break;
+            }
+
         } else {
             JOptionPane.showMessageDialog(this, "Login gagal. Username atau password salah.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
         
     }//GEN-LAST:event_btnloginActionPerformed
 
