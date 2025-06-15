@@ -3,8 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.tugas.besar.View.Pemilik;
-import com.tugas.besar.View.Pemilik.ViewDaftarAkunPegawai;
-import com.tugas.besar.View.Pemilik.ViewLaporanPenjualan;
+import com.tugas.besar.DataAccesObject.Pegawai.RiwayatDAO;
+import com.tugas.besar.Model.Pemilik.StatistikBulanan;
+import java.io.FileOutputStream;
+import java.text.DateFormatSymbols;
+import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 /**
  *
  * @author silvi
@@ -18,7 +28,39 @@ public class ViewLaporanPenjualan extends javax.swing.JFrame {
      */
     public ViewLaporanPenjualan() {
         initComponents();
+        updateTablePenjualan();
+        yearChooser.addPropertyChangeListener("year", (evt) -> {
+            updateTablePenjualan();
+        });
+        
+        monthChooser.addPropertyChangeListener("month", (evt) -> {
+            updateTablePenjualan();
+        });
+
+
     }
+    
+    private void updateTablePenjualan() {
+        int tahun = yearChooser.getYear();
+        int bulan = monthChooser.getMonth() + 1;
+        RiwayatDAO dao = new RiwayatDAO();
+        List<StatistikBulanan> data = dao.getStatistikBulananByTahunDanBulan(tahun, bulan);
+
+        DefaultTableModel model = (DefaultTableModel) tblPenjualan.getModel();
+        model.setRowCount(0);
+
+        int no = 1;
+        for (StatistikBulanan stat : data) {
+            String namaBulan = new DateFormatSymbols().getMonths()[stat.getBulan() - 1];
+            model.addRow(new Object[] {
+                no++,
+                namaBulan,
+                stat.getTotalPendapatan()
+            });
+        }
+
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,8 +79,10 @@ public class ViewLaporanPenjualan extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbllaporanpenjualan = new javax.swing.JTable();
+        tblPenjualan = new javax.swing.JTable();
         btncetaklaporan = new javax.swing.JButton();
+        yearChooser = new com.toedter.calendar.JYearChooser();
+        monthChooser = new com.toedter.calendar.JMonthChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,30 +128,35 @@ public class ViewLaporanPenjualan extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         jLabel1.setText("Laporan Penjualan");
 
-        tbllaporanpenjualan.setModel(new javax.swing.table.DefaultTableModel(
+        tblPenjualan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "No", "Nama Makanan", "Kategori", "Harga", "Jumlah Pesanan"
+                "No", "Bulan", "Total Pendapatan"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(tbllaporanpenjualan);
+        jScrollPane2.setViewportView(tblPenjualan);
 
         btncetaklaporan.setFont(new java.awt.Font("Sans Serif Collection", 1, 12)); // NOI18N
         btncetaklaporan.setText("Cetak laporan");
+        btncetaklaporan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncetaklaporanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,35 +164,50 @@ public class ViewLaporanPenjualan extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btncetaklaporan)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(24, 24, 24)
                             .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(233, 233, 233)
-                            .addComponent(jLabel2))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(283, 283, 283)
-                            .addComponent(jLabel1))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(87, 87, 87)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 596, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(233, 233, 233)
+                                    .addComponent(jLabel2))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(283, 283, 283)
+                                    .addComponent(jLabel1)))
+                            .addGap(78, 78, 78)
+                            .addComponent(yearChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btncetaklaporan))
                 .addContainerGap(194, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(monthChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(205, 205, 205))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(68, 68, 68)
-                .addComponent(btncetaklaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(monthChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(btncetaklaporan, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(168, 168, 168)
+                        .addComponent(yearChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
 
@@ -176,6 +240,58 @@ public class ViewLaporanPenjualan extends javax.swing.JFrame {
     LaporanPenjualanFrame.setLocationRelativeTo(null);
     this.dispose();
     }//GEN-LAST:event_btnmenulaporanpenjualanActionPerformed
+
+    private void btncetaklaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncetaklaporanActionPerformed
+        int tahun = yearChooser.getYear();
+        int bulan = monthChooser.getMonth() + 1;
+        RiwayatDAO dao = new RiwayatDAO();
+        List<StatistikBulanan> data = dao.getStatistikBulananByTahunDanBulan(tahun, bulan);
+        
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Laporan Statistik Bulanan");
+
+        // Header kolom
+        Row header = sheet.createRow(0);
+        header.createCell(0).setCellValue("Bulan");
+        header.createCell(1).setCellValue("Tahun");
+        header.createCell(2).setCellValue("Jumlah");
+
+        // Isi data baris per baris
+        int rownum = 1;
+        for (StatistikBulanan sb : data) {
+            Row row = sheet.createRow(rownum++);
+            row.createCell(0).setCellValue(sb.getBulan());
+            row.createCell(1).setCellValue(tahun);
+            row.createCell(2).setCellValue(sb.getTotalPendapatan());
+        }
+
+        // Autosize kolom
+        for (int i = 0; i < 3; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Simpan file Excel");
+        fileChooser.setSelectedFile(new java.io.File("laporan_statistik.xlsx"));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            java.io.File fileToSave = fileChooser.getSelectedFile();
+
+            try (FileOutputStream out = new FileOutputStream(fileToSave)) {
+                workbook.write(out);
+                workbook.close();
+                JOptionPane.showMessageDialog(this, "Export Excel berhasil di:\n" + fileToSave.getAbsolutePath());
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Gagal export Excel: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Export dibatalkan");
+        }
+        
+        
+    }//GEN-LAST:event_btncetaklaporanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -212,6 +328,8 @@ public class ViewLaporanPenjualan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tbllaporanpenjualan;
+    private com.toedter.calendar.JMonthChooser monthChooser;
+    private javax.swing.JTable tblPenjualan;
+    private com.toedter.calendar.JYearChooser yearChooser;
     // End of variables declaration//GEN-END:variables
 }

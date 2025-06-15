@@ -3,11 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.tugas.besar.View.Pegawai;
-import com.tugas.besar.View.Pegawai.ProductView;
-import com.tugas.besar.View.Pegawai.KategoriView;
-import com.tugas.besar.View.Pegawai.TransaksiView;
-import com.tugas.besar.View.Pegawai.RiwayatView;
-import com.tugas.besar.View.Pegawai.OperasionalView;
+import com.tugas.besar.Controller.Pegawai.RiwayatController;
+import com.tugas.besar.DataAccesObject.Pegawai.RiwayatDAO;
+import com.tugas.besar.Model.Pegawai.Riwayat;
+import com.tugas.besar.Model.Pegawai.TransaksiStatistik;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import java.io.FileOutputStream;
+import java.util.Date;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 /**
@@ -23,6 +35,20 @@ public class RiwayatView extends javax.swing.JFrame {
      */
     public RiwayatView() {
         initComponents();
+        loadTableRiwayat();
+        loadStatistik();
+        dataPicker.getDateEditor().addPropertyChangeListener(evt -> {
+            if ("date".equals(evt.getPropertyName())) {
+                applyTanggalFilter();
+            }
+        });
+
+        dataPicker2.getDateEditor().addPropertyChangeListener(evt -> {
+            if ("date".equals(evt.getPropertyName())) {
+                applyTanggalFilter();
+            }
+        });
+
     }
 
     /**
@@ -44,17 +70,20 @@ public class RiwayatView extends javax.swing.JFrame {
         btnmenuproduk2 = new javax.swing.JButton();
         btnmenutransaksi2 = new javax.swing.JButton();
         btnmenuoperasional2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        tftotaltransaski = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        tftotalpendapatan = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         tfratarata = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        tftotaltransaksi = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblriwayat = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        tftotalpendapatan = new javax.swing.JTextField();
+        dataPicker = new com.toedter.calendar.JDateChooser();
+        dataPicker2 = new com.toedter.calendar.JDateChooser();
+        labelAwalTanggal = new javax.swing.JLabel();
+        labelSampaiTanggal = new javax.swing.JLabel();
+        cetakLaporan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,7 +91,7 @@ public class RiwayatView extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         jLabel2.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
-        jLabel2.setText("Riwayat Pembelian");
+        jLabel2.setText("Riwayat Transaksi");
 
         btnmenukategori2.setFont(new java.awt.Font("Sans Serif Collection", 1, 14)); // NOI18N
         btnmenukategori2.setText("Kategori");
@@ -138,69 +167,15 @@ public class RiwayatView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tftotaltransaski.setEditable(false);
-
-        jLabel6.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        jLabel6.setText("Total Transaksi");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(tftotaltransaski, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(116, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tftotaltransaski, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-        );
-
-        jLabel3.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        jLabel3.setText("Total Pendapatan");
-
-        tftotalpendapatan.setEditable(false);
-        tftotalpendapatan.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(tftotalpendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(118, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tftotalpendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
-        );
-
         jLabel4.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel4.setText("Rata - Rata / Transaksi");
 
         tfratarata.setEditable(false);
+
+        jLabel6.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jLabel6.setText("Total Transaksi");
+
+        tftotaltransaksi.setEditable(false);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -214,15 +189,24 @@ public class RiwayatView extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(tfratarata, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tftotaltransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tfratarata, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tftotaltransaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfratarata, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -248,6 +232,23 @@ public class RiwayatView extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblriwayat);
 
+        jLabel3.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jLabel3.setText("Total Pendapatan");
+
+        tftotalpendapatan.setEditable(false);
+        tftotalpendapatan.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+
+        labelAwalTanggal.setText("Dari Tanggal");
+
+        labelSampaiTanggal.setText("Sampai Tanggal");
+
+        cetakLaporan.setText("Cetak Laporan");
+        cetakLaporan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cetakLaporanActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -258,21 +259,40 @@ public class RiwayatView extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(93, 93, 93)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel2)))
-                .addGap(0, 929, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(249, 249, 249)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addComponent(labelAwalTanggal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dataPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelSampaiTanggal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dataPicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cetakLaporan)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(17, 17, 17)
+                                            .addComponent(tftotalpendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -281,18 +301,35 @@ public class RiwayatView extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
-                .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(labelAwalTanggal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(dataPicker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(labelSampaiTanggal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dataPicker2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cetakLaporan)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tftotalpendapatan, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -305,47 +342,207 @@ public class RiwayatView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1199, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnmenuoperasional2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuoperasional2ActionPerformed
+        OperasionalView operasionalFrame = new OperasionalView();
+        operasionalFrame.setVisible(true);
+        operasionalFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnmenuoperasional2ActionPerformed
+
     private void btnmenutransaksi2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenutransaksi2ActionPerformed
-    TransaksiView transaksiFrame = new TransaksiView();
-    transaksiFrame.setVisible(true);
-    transaksiFrame.setLocationRelativeTo(null);
-    this.dispose();
+        TransaksiView transaksiFrame = new TransaksiView();
+        transaksiFrame.setVisible(true);
+        transaksiFrame.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnmenutransaksi2ActionPerformed
 
     private void btnmenuproduk2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuproduk2ActionPerformed
-    ProductView productFrame = new ProductView();
-    productFrame.setVisible(true);
-    productFrame.setLocationRelativeTo(null);
-    this.dispose();
+        ProductView productFrame = new ProductView();
+        productFrame.setVisible(true);
+        productFrame.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnmenuproduk2ActionPerformed
 
-    private void btnmenukategori2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenukategori2ActionPerformed
-    KategoriView kategoriFrame = new KategoriView();
-    kategoriFrame.setVisible(true);
-    kategoriFrame.setLocationRelativeTo(null);
-    this.dispose();
-    }//GEN-LAST:event_btnmenukategori2ActionPerformed
-
     private void btnmenuriwayat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuriwayat2ActionPerformed
-    RiwayatView riwayatFrame = new RiwayatView();
-    riwayatFrame.setVisible(true);
-    riwayatFrame.setLocationRelativeTo(null);
-    this.dispose();
+        RiwayatView riwayatFrame = new RiwayatView();
+        riwayatFrame.setVisible(true);
+        riwayatFrame.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnmenuriwayat2ActionPerformed
 
-    private void btnmenuoperasional2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuoperasional2ActionPerformed
-    OperasionalView operasionalFrame = new OperasionalView();
-    operasionalFrame.setVisible(true);
-    operasionalFrame.setLocationRelativeTo(null);
-    this.dispose();
-    }//GEN-LAST:event_btnmenuoperasional2ActionPerformed
+    private void btnmenukategori2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenukategori2ActionPerformed
+        KategoriView kategoriFrame = new KategoriView();
+        kategoriFrame.setVisible(true);
+        kategoriFrame.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_btnmenukategori2ActionPerformed
 
+    private void cetakLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cetakLaporanActionPerformed
+         // Ambil tanggal dari date picker
+        Date dari = dataPicker.getDate();
+        Date sampai = dataPicker2.getDate();
+
+        List<Riwayat> riwayatList;
+
+        if (dari == null || sampai == null) {
+            // Jika tanggal tidak dipilih, ambil semua data
+            RiwayatController controller = new RiwayatController();
+            riwayatList = controller.read();
+        } else {
+            // Jika tanggal dipilih, ambil data berdasarkan rentang
+            RiwayatDAO dao = new RiwayatDAO();
+            riwayatList = dao.getByRentangTanggal(dari, sampai);
+        }
+
+        // Buat workbook dan sheet
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Laporan Riwayat");
+        CreationHelper createHelper = workbook.getCreationHelper();
+        CellStyle dateCellStyle = workbook.createCellStyle();
+        dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy HH:mm"));
+
+       
+
+        // Saat mengisi tanggal ke cell
+       
+        // Header
+        Row header = sheet.createRow(0);
+        header.createCell(0).setCellValue("No");
+        header.createCell(1).setCellValue("Id");
+        header.createCell(2).setCellValue("Total Harga");
+        header.createCell(3).setCellValue("Tanggal");
+
+        // Isi data
+        int rownum = 1;
+        int no = 1;
+        for (Riwayat riwayat : riwayatList) {
+            Row row = sheet.createRow(rownum++);
+            row.createCell(0).setCellValue(no++);
+            row.createCell(1).setCellValue(riwayat.getId());
+            row.createCell(2).setCellValue(riwayat.getTotalHarga());
+            Cell cell = row.createCell(3);
+            cell.setCellValue(riwayat.getCreatedAt()); // createdAt berupa java.util.Date
+            cell.setCellStyle(dateCellStyle);
+        }
+
+        // Auto-size kolom
+        for (int i = 0; i < 4; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        // JFileChooser
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Simpan file Excel");
+        fileChooser.setSelectedFile(new java.io.File("laporan_riwayat.xlsx"));
+
+        int userSelection = fileChooser.showSaveDialog(this);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            java.io.File fileToSave = fileChooser.getSelectedFile();
+            try (FileOutputStream out = new FileOutputStream(fileToSave)) {
+                workbook.write(out);
+                workbook.close();
+                JOptionPane.showMessageDialog(this, "Export berhasil:\n" + fileToSave.getAbsolutePath());
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Gagal export: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Export dibatalkan");
+        }
+    }//GEN-LAST:event_cetakLaporanActionPerformed
+    private void applyTanggalFilter() {
+        Date dari = dataPicker.getDate();
+        Date sampai = dataPicker2.getDate();
+
+        if (dari != null && sampai != null) {
+            filterTransaksiByRentangTanggal(dari, sampai);
+        }
+    }
+
+    
+    private void filterTransaksiByRentangTanggal(Date dari, Date sampai) {
+        RiwayatDAO dao = new RiwayatDAO();
+        List<Riwayat> riwayatList = dao.getByRentangTanggal(dari, sampai);
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("No");
+        model.addColumn("Id");
+        model.addColumn("Total Harga");
+        model.addColumn("Tanggal");
+
+        int no = 1;
+        for (Riwayat r : riwayatList) {
+            model.addRow(new Object[]{
+                no++,
+                r.getId(),
+                r.getTotalHarga(),
+                r.getCreatedAt()
+            });
+        }
+
+        tblriwayat.setModel(model);
+
+        // update statistik juga
+        TransaksiStatistik stats = dao.getStatistikByRentangTanggal(dari, sampai);
+        tftotaltransaksi.setText(String.valueOf(stats.getTotalTransaksi()));
+        tftotalpendapatan.setText(String.valueOf(stats.getTotalPendapatan()));
+        tfratarata.setText(String.format("%.2f", stats.getRataRataPendapatan()));
+    }
+    private void loadStatistik(){
+        RiwayatDAO riwayatDAO = new RiwayatDAO();
+        TransaksiStatistik stats = riwayatDAO.getTransaksiStatistik();
+
+        tfratarata.setText(String.valueOf(stats.getRataRataPendapatan()));
+        tftotaltransaksi.setText(String.valueOf(stats.getTotalTransaksi()));
+        tftotalpendapatan.setText(String.valueOf(stats.getTotalPendapatan()));
+        
+    }
+    private void loadTableRiwayat() {
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tblriwayat.setModel(tableModel);
+
+        
+
+        tableModel.addColumn("No");
+        tableModel.addColumn("Id");
+        tableModel.addColumn("Total Harga");
+        tableModel.addColumn("Tanggal");
+        tableModel.setRowCount(0);
+
+        RiwayatController controller = new RiwayatController();
+        
+        
+        List<Riwayat> daftarRiwayat = controller.read();
+        int no = 1;
+        for (Riwayat riwayat : daftarRiwayat) {
+            Object[] baris = {
+                    no++,
+                    riwayat.getId(),
+                    riwayat.getTotalHarga(),
+                    riwayat.getCreatedAt()
+//                produk.getId(),
+                
+                
+            };
+            tableModel.addRow(baris);
+        }
+          tblriwayat.setFillsViewportHeight(true);      
+          
+    }
+    
+    
+    
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -377,21 +574,24 @@ public class RiwayatView extends javax.swing.JFrame {
     private javax.swing.JButton btnmenuproduk2;
     private javax.swing.JButton btnmenuriwayat2;
     private javax.swing.JButton btnmenutransaksi2;
+    private javax.swing.JButton cetakLaporan;
+    private com.toedter.calendar.JDateChooser dataPicker;
+    private com.toedter.calendar.JDateChooser dataPicker2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labelAwalTanggal;
+    private javax.swing.JLabel labelSampaiTanggal;
     private javax.swing.JTable tblriwayat;
     private javax.swing.JTextField tfratarata;
     private javax.swing.JTextField tftotalpendapatan;
-    private javax.swing.JTextField tftotaltransaski;
+    private javax.swing.JTextField tftotaltransaksi;
     // End of variables declaration//GEN-END:variables
 }

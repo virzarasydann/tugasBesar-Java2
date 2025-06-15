@@ -23,6 +23,24 @@
             <artifactId>bcrypt</artifactId>
             <version>0.10.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.toedter</groupId>
+            <artifactId>jcalendar</artifactId>
+            <version>1.4</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>5.4.1</version>
+    </dependency>
+
+    <!-- POI OOXML (untuk XLSX dan format Office Open XML) -->
+    <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>5.4.1</version>
+    </dependency>
     </dependencies>
     
     <build>
